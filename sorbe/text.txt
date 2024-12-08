@@ -1,0 +1,16 @@
+ <Grid Margin="0,71,0,577" Background="#FF313131">
+            <Label Content="/CONTEXT/" HorizontalAlignment="Left" Margin="32,10,0,0" VerticalAlignment="Top" Height="68" Width="534" Foreground="White" FontFamily="Yu Gothic Medium" FontSize="44"/>
+            <StackPanel Margin="32,112,58,49" Background="Red">
+                <ScrollViewer Height="256" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Visible">
+
+                </ScrollViewer>
+            </StackPanel>
+        </Grid>
+        <Grid Margin="0,487,0,179" Background="#FF313131">
+            <Label Content="/CONTEXT/" HorizontalAlignment="Left" Margin="32,10,0,0" VerticalAlignment="Top" Height="68" Width="534" Foreground="White" FontFamily="Yu Gothic Medium" FontSize="44"/>
+            <StackPanel Margin="32,112,58,27" Background="Red">
+                <ScrollViewer Height="256" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Visible">
+
+                </ScrollViewer>
+            </StackPanel>
+</Grid>
