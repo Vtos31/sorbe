@@ -10,79 +10,13 @@
 *.userosscache
 *.sln.docstates
 
-#Build source directories
-bin/
-obj/
 
-#Publish and deploy files
-*.publish/
-*.deploy/
-.publishxml
-
-#Logs, locks, databases, temporary files
-*.log
-*.cache
-*.lock
-*.db
-*.mdf
-*.ldf
-*.sqlite
-*.sqlite3
-
-#Configuring the IDE
-.vs/
-*.user
-*.suo
-*.userosscache
-*.sln.docstates
-*.VC.db
-.idea/
-
-#Configuring packages
-packages/
-*.nupkg
-*.snupkg
-
-#NuGet dependencies
-project.lock.json
-project.fragment.lock.json
-artifacts/
-
-#Files created during operation
-*.pidb
-*.pdb
-
-#Configuration files for Build
-*.csproj.user
-.vbproj.user
-
-#Other temporary files
-_ReSharper/ 
-Thumbs.db
-Desktop.ini
-
-#Configuration files for local application operation
-*.tlog
-*.ipch
-*.obj
-
-#Git attributes and cache
-*.orig
-.git/
-
-#Files of third-party libraries
-*.dll
-*.exe
-
-#Environment settings
-*.appsettings.json
-*.appsettings.Development.json
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
 #Txt File
-text.txt
+.txt
 # Mono auto generated files
 mono_crash.*
 
@@ -171,16 +105,6 @@ StyleCopReport.xml
 # Chutzpah Test files
 _Chutzpah*
 
-# Visual C++ cache files
-ipch/
-*.aps
-*.ncb
-*.opendb
-*.opensdf
-*.sdf
-*.cachefile
-*.VC.db
-*.VC.VC.opendb
 
 # Visual Studio profiler
 *.psess
@@ -310,13 +234,6 @@ ClientBin/
 *.publishsettings
 orleans.codegen.cs
 
-# Including strong name files can present a security risk
-# (https://github.com/github/gitignore/pull/2483#issue-259490424)
-#*.snk
-
-# Since there are multiple workflows, uncomment next line to ignore bower_components
-# (https://github.com/github/gitignore/pull/1529#issuecomment-104372622)
-#bower_components/
 
 # RIA/Silverlight projects
 Generated_Code/
