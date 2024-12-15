@@ -5,29 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:sorbe"
         mc:Ignorable="d"
-        Title="MainWindow" WindowState="Maximized" Height="1080" Width="1920" >
+        Title="MainWindow" WindowState="Maximized" Height="800" Width="1520" >
     <Grid Background="#FF131313">
 
-        <Rectangle HorizontalAlignment="Center" Height="1" Stroke="Gray" VerticalAlignment="Top" Width="1920" RadiusX="7.3" RadiusY="7.3" Margin="0,70,0,0" RenderTransformOrigin="0.5,0.5">
-            <Rectangle.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform ScaleY="-1"/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Rectangle.RenderTransform>
-        </Rectangle>
-        
-        <ScrollViewer x:Name="MainContent"  Margin="0,76,0,0">
-            <StackPanel x:Name="GridTestMOW" Orientation="Vertical">
-                
-            </StackPanel>
-        </ScrollViewer>
-        <StackPanel></StackPanel>
+        <Rectangle HorizontalAlignment="Center" Height="2" Stroke="Gray" VerticalAlignment="Top" Width="1920" RadiusX="7.3" RadiusY="7.3" Margin="0,70,0,0" RenderTransformOrigin="0.5,0.5" Fill="Gray"/>
+
+
         <Button Content="Button" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="49" Width="49"/>
-        <TextBox HorizontalAlignment="Left" Margin="693,10,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="452" Height="42"/>
-        <Rectangle HorizontalAlignment="Left" Height="49" Margin="623,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="49">
+        <TextBox HorizontalAlignment="Center" Margin="0,14,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="452" Height="42"/>
+        <Rectangle HorizontalAlignment="Left" Height="49" Margin="479,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="49">
             <Rectangle.Fill>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black"/>
@@ -35,6 +21,27 @@
                 </LinearGradientBrush>
             </Rectangle.Fill>
         </Rectangle>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="1852,10,0,0" VerticalAlignment="Top" Width="49" Height="49"/>
+        <Button Content="LogIn" HorizontalAlignment="Left" Margin="1455,24,0,0" VerticalAlignment="Top" Width="50" Height="28" Click="LogIn_Click"/>
+        <Button Content="SignIn" HorizontalAlignment="Left" Margin="1391,24,0,0" VerticalAlignment="Top" Width="50" Height="28" Click="SignIn_Click"/>
+        <Frame x:Name="Main" Margin="0,71,0,0" NavigationUIVisibility="Hidden">
+
+        </Frame>
+        <Border x:Name="AcountEnterPanel" Margin="1262,72,0,459" Visibility="Collapsed"   BorderThickness="1" BorderBrush="Gray" Background="#FF131313">
+
+            <StackPanel>
+                <Button  Content="X" Height="21" Width="21" HorizontalAlignment="Left" Click="AcountEnterPanelExit_Click"/>
+                <Label x:Name="AcountEnterTitle" Content="Реєстрація" Foreground="White" HorizontalAlignment="Center" FontSize="24"/>
+                <Label Content="Ім'я" Foreground="White"  FontSize="12"/>
+                <TextBox/>
+                <Label Content="Пароль" Foreground="White"  FontSize="12"/>
+                <TextBox/>
+                <Label x:Name="NonLogInText" Content="Перевірка паролю" Foreground="White"  FontSize="12"/>
+                <TextBox x:Name="NonLogInPole"/>
+                <Label Foreground="White"  FontSize="12" Height="20"/>
+
+                <Button Content="Зареєструватися" Height="22" Width="98"/>
+            </StackPanel>
+        </Border>
+
     </Grid>
 </Window>

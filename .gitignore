@@ -10,9 +10,79 @@
 *.userosscache
 *.sln.docstates
 
+#Build source directories
+bin/
+obj/
+
+#Publish and deploy files
+*.publish/
+*.deploy/
+.publishxml
+
+#Logs, locks, databases, temporary files
+*.log
+*.cache
+*.lock
+*.db
+*.mdf
+*.ldf
+*.sqlite
+*.sqlite3
+
+#Configuring the IDE
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.VC.db
+.idea/
+
+#Configuring packages
+packages/
+*.nupkg
+*.snupkg
+
+#NuGet dependencies
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+#Files created during operation
+*.pidb
+*.pdb
+
+#Configuration files for Build
+*.csproj.user
+.vbproj.user
+
+#Other temporary files
+_ReSharper/ 
+Thumbs.db
+Desktop.ini
+
+#Configuration files for local application operation
+*.tlog
+*.ipch
+*.obj
+
+#Git attributes and cache
+*.orig
+.git/
+
+#Files of third-party libraries
+*.dll
+*.exe
+
+#Environment settings
+*.appsettings.json
+*.appsettings.Development.json
+
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
+#Txt File
+text.txt
 # Mono auto generated files
 mono_crash.*
 
