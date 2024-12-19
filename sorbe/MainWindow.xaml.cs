@@ -46,6 +46,12 @@ namespace sorbe
             NonLogInPole.Visibility = Visibility.Collapsed;
             NonLogInText.Visibility = Visibility.Collapsed;
         }
+
+        private void Home_Click(object sender, RoutedEventArgs e)
+        {
+            MainPage mainPage = new MainPage();
+            Main.Content = mainPage;
+        }
     }
 
 }

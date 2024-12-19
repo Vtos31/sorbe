@@ -11,7 +11,7 @@
         <Rectangle HorizontalAlignment="Center" Height="2" Stroke="Gray" VerticalAlignment="Top" Width="1920" RadiusX="7.3" RadiusY="7.3" Margin="0,70,0,0" RenderTransformOrigin="0.5,0.5" Fill="Gray"/>
 
 
-        <Button Content="Button" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="49" Width="49"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="49" Width="49" Click="Home_Click"/>
         <TextBox HorizontalAlignment="Center" Margin="0,14,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="452" Height="42"/>
         <Rectangle HorizontalAlignment="Left" Height="49" Margin="479,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="49">
             <Rectangle.Fill>
