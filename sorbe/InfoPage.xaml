@@ -5,30 +5,49 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:sorbe"
         mc:Ignorable="d"
-
+        Height="800"
+      Width="1535"
       Title="InfoPage">
 
-    <Grid Background="#FF131313">
-
-        <StackPanel Margin="31,68,998,68" Background="Black">
-            <Label Content="&quot;Rate&quot;" FontSize="48" Foreground="White"/>
-            <Label Content="&quot;Realease date&quot;" FontSize="24" Foreground="White"/>
-            <Label Content="&quot;Format&quot;" FontSize="24" Foreground="White"/>
-            <Label Content="&quot;Genre&quot;" FontSize="24" Foreground="White"/>
-            <Label Content="&quot;Producer&quot;" FontSize="24" Foreground="White"/>
-            <Label Content="&quot;Writer&quot;" FontSize="24" Foreground="White"/>
-        </StackPanel>
-        <StackPanel Margin="998,68,31,68" Background="Black">
-            <Label Content="TrackList" FontSize="36" Foreground="White"/>
-            <ScrollViewer>
-                <StackPanel>
-
+    <Grid Background="#FF131313" >
+        <ScrollViewer >
+            <Grid >
+                <StackPanel Margin="31,68,998,203" Background="Black">
+                    <Label Content="&quot;Rate&quot;" FontSize="48" Foreground="White"/>
+                    <Label Content="&quot;Realease date&quot;" FontSize="24" Foreground="White"/>
+                    <Label Content="&quot;Format&quot;" FontSize="24" Foreground="White"/>
+                    <Label Content="&quot;Genre&quot;" FontSize="24" Foreground="White"/>
+                    <Label Content="&quot;Producer&quot;" FontSize="24" Foreground="White"/>
+                    <Label Content="&quot;Writer&quot;" FontSize="24" Foreground="White"/>
                 </StackPanel>
-            </ScrollViewer>
-        </StackPanel>
-        <Image Height="450" Margin="0,68,0,0" Width="450" Source="/PRAY FOR PARIS WALLPAPER 1920x1080 - Imgur.png" Stretch="UniformToFill" VerticalAlignment="Top" HorizontalAlignment="Center"/>
-        <Label Content="&quot;Label&quot;" HorizontalAlignment="Center" Margin="0,491,0,0" VerticalAlignment="Top" Foreground="White" Height="133" Width="450" FontSize="72" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-        <Label Content="&quot;SubLabel&quot;" HorizontalAlignment="Center" Margin="0,543,0,0" VerticalAlignment="Top" Foreground="White" Height="132" Width="450" FontSize="36" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                <StackPanel Margin="998,68,31,203" Background="Black">
+                    <Label Content="TrackList" FontSize="36" Foreground="White"/>
+                    <ScrollViewer>
+                        <StackPanel>
+
+                        </StackPanel>
+                    </ScrollViewer>
+                </StackPanel>
+                <Image Height="450" Margin="0,68,0,0" Width="450" Source="/PRAY FOR PARIS WALLPAPER 1920x1080 - Imgur.png" Stretch="UniformToFill" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+                <Label Content="&quot;Label&quot;" HorizontalAlignment="Center" Margin="0,491,0,0" VerticalAlignment="Top" Foreground="White" Height="133" Width="450" FontSize="72" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                <Label Content="&quot;SubLabel&quot;" HorizontalAlignment="Center" Margin="0,558,0,0" VerticalAlignment="Top" Foreground="White" Height="132" Width="450" FontSize="36" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                <Border BorderBrush="Black" BorderThickness="1" Margin="264,690,275,42" Background="#FF1A1A1A">
+                    <Grid>
+                        <Image Source="/PRAY FOR PARIS WALLPAPER 1920x1080 - Imgur.png" Margin="10,10,0,0" Width="96" Height="87" Stretch="Fill" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                        <Label Content="&quot;NAME&quot;" HorizontalAlignment="Left" Margin="111,18,0,0" VerticalAlignment="Top" Height="70" Width="216" FontSize="48" Foreground="White"/>
+                        <Label Content="&quot;80&quot;" HorizontalAlignment="Left" Margin="16,84,0,0" VerticalAlignment="Top" Height="55" Width="84" FontSize="36" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                        
+                            <TextBlock TextWrapping="Wrap" Text="AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" Foreground="White" FontSize="16" Margin="111,84,0,0"/>
+                            <Button Height="30" Width="31" HorizontalAlignment="Right" Margin="0,144,353,113"/>
+                        <Button Height="30" Width="31" HorizontalAlignment="Right" Margin="0,144,317,113"/>
+
+
+                    </Grid>
+                </Border>
+
+            </Grid>
+        </ScrollViewer>
+
 
     </Grid>
 </Page>
