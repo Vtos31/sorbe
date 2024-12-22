@@ -48,7 +48,7 @@ namespace sorbe
                         
                         Background = new ImageBrush
                         {
-                            ImageSource = new BitmapImage(new Uri("C:\\Users\\Admin\\source\\repos\\sorbe\\sorbe\\PRAY FOR PARIS WALLPAPER 1920x1080 - Imgur.png")),
+                            ImageSource = new BitmapImage(new Uri("C:\\Users\\Admin\\source\\repos\\sorbe\\sorbe\\Image\\PRAY FOR PARIS WALLPAPER 1920x1080 - Imgur.png")),
                             Stretch = Stretch.UniformToFill
                         }
                     };

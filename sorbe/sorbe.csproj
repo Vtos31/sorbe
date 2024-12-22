@@ -9,11 +9,23 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Image\1200x1200bf-60.jpg" />
+    <None Remove="Image\a4051869210_10.jpg" />
+    <None Remove="Image\Born-like-this.jpg" />
     <None Remove="PRAY FOR PARIS WALLPAPER 1920x1080 - Imgur.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="PRAY FOR PARIS WALLPAPER 1920x1080 - Imgur.png" />
+    <Resource Include="Image\1200x1200bf-60.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\a4051869210_10.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\Born-like-this.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\PRAY FOR PARIS WALLPAPER 1920x1080 - Imgur.png" />
   </ItemGroup>
 
 </Project>

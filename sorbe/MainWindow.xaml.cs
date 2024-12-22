@@ -52,6 +52,12 @@ namespace sorbe
             MainPage mainPage = new MainPage();
             Main.Content = mainPage;
         }
+
+        private void Profile_Click(object sender, RoutedEventArgs e)
+        {
+            ProfilePage profilePage = new ProfilePage();
+            Main.Content = profilePage;
+        }
     }
 
 }

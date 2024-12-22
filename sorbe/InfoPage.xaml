@@ -28,12 +28,12 @@
                         </StackPanel>
                     </ScrollViewer>
                 </StackPanel>
-                <Image Height="450" Margin="0,68,0,0" Width="450" Source="/PRAY FOR PARIS WALLPAPER 1920x1080 - Imgur.png" Stretch="UniformToFill" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+                <Image Height="450" Margin="0,68,0,0" Width="450" Source="Image/PRAY FOR PARIS WALLPAPER 1920x1080 - Imgur.png" Stretch="UniformToFill" VerticalAlignment="Top" HorizontalAlignment="Center"/>
                 <Label Content="&quot;Label&quot;" HorizontalAlignment="Center" Margin="0,491,0,0" VerticalAlignment="Top" Foreground="White" Height="133" Width="450" FontSize="72" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
                 <Label Content="&quot;SubLabel&quot;" HorizontalAlignment="Center" Margin="0,558,0,0" VerticalAlignment="Top" Foreground="White" Height="132" Width="450" FontSize="36" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
                 <Border BorderBrush="Black" BorderThickness="1" Margin="264,690,275,42" Background="#FF1A1A1A">
                     <Grid>
-                        <Image Source="/PRAY FOR PARIS WALLPAPER 1920x1080 - Imgur.png" Margin="10,10,0,0" Width="96" Height="87" Stretch="Fill" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                        <Image Source="Image/PRAY FOR PARIS WALLPAPER 1920x1080 - Imgur.png" Margin="10,10,0,0" Width="96" Height="87" Stretch="Fill" VerticalAlignment="Top" HorizontalAlignment="Left"/>
                         <Label Content="&quot;NAME&quot;" HorizontalAlignment="Left" Margin="111,18,0,0" VerticalAlignment="Top" Height="70" Width="216" FontSize="48" Foreground="White"/>
                         <Label Content="&quot;80&quot;" HorizontalAlignment="Left" Margin="16,84,0,0" VerticalAlignment="Top" Height="55" Width="84" FontSize="36" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
                         

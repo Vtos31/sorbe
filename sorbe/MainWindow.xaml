@@ -23,6 +23,7 @@
         </Rectangle>
         <Button Content="LogIn" HorizontalAlignment="Left" Margin="1455,24,0,0" VerticalAlignment="Top" Width="50" Height="28" Click="LogIn_Click"/>
         <Button Content="SignIn" HorizontalAlignment="Left" Margin="1391,24,0,0" VerticalAlignment="Top" Width="50" Height="28" Click="SignIn_Click"/>
+        <Button x:Name="Profile" Content="Profile" HorizontalAlignment="Left" Margin="1332,13,0,0" VerticalAlignment="Top" Width="50" Height="50" Click="Profile_Click"/>
         <Frame x:Name="Main" Margin="0,71,0,0" NavigationUIVisibility="Hidden">
 
         </Frame>
