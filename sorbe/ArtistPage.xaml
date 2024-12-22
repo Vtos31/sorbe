@@ -1,0 +1,39 @@
+﻿<Page x:Class="sorbe.ArtistPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:sorbe"
+      mc:Ignorable="d" 
+
+      Title="ProfilePage">
+    <ScrollViewer VerticalScrollBarVisibility="Hidden">
+        <StackPanel  VerticalAlignment="Stretch">
+
+            <Grid>
+                <Image HorizontalAlignment="Left" VerticalAlignment="Top" Width="400" Height="400" Source="/Image/Born-like-this.jpg"/>
+                <Label Content="&quot;ARTIST NAME&quot;" HorizontalAlignment="Left" Margin="400,0,0,0" VerticalAlignment="Top" Height="135" Width="1125" Foreground="White" FontSize="100" FontFamily="Segoe UI Semibold" IsEnabled="False"/>
+                <TextBlock Text="&quot;ABOUT&quot;" HorizontalAlignment="Left" Margin="426,137,0,0" VerticalAlignment="Top" Height="195" Width="1125" Foreground="#FFC3C2C2" FontSize="48" FontFamily="Segoe UI Semibold" IsEnabled="False"/>
+                <Label Content="&quot;LINK&quot;" HorizontalAlignment="Left" Margin="426,337,0,0" VerticalAlignment="Top" Height="53" Width="1125" Foreground="#FFC3C2C2" FontSize="36" FontFamily="Segoe UI Semibold" IsEnabled="False"/>
+            </Grid>
+
+            <StackPanel Orientation="Horizontal">
+
+                <StackPanel Height="753" VerticalAlignment="Stretch" Width="834">
+                    <Label Foreground="White" FontSize="90" Content="Найкращий альбом" IsEnabled="False" HorizontalAlignment="Center" VerticalAlignment="Top" />
+                    <Button Width="500" Height="500" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <Label FontSize="48" Foreground="White" Content="&quot;Album name&quot;" HorizontalContentAlignment="Center" Height="65"></Label>
+                    <Label Foreground="White" Content="&quot;Artist name&quot;" HorizontalContentAlignment="Center" Height="58" FontSize="36"/>
+                </StackPanel>
+                <UniformGrid Rows="2" Columns="2" Height="700" Width="700" Margin="0,50,0,0">
+                    <Image Source="/Image/1200x1200bf-60.jpg" Stretch="UniformToFill" />
+                    <Image Source="/Image/a4051869210_10.jpg" Stretch="UniformToFill" />
+                    <Image Source="C:\Users\Admin\source\repos\sorbe\sorbe\Image\Born-like-this.jpg" Stretch="UniformToFill" />
+                    <Image Source="/Image/PRAY FOR PARIS WALLPAPER 1920x1080 - Imgur.png" Stretch="UniformToFill" />
+                </UniformGrid>
+            </StackPanel>
+            <Label Content="AAAAAAAAA" FontSize="72" Background="#FF1A1A1A" Foreground="#FF1A1A1A"></Label>
+        </StackPanel>
+    </ScrollViewer>
+
+</Page>
