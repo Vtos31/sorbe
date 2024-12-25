@@ -24,7 +24,7 @@
 
                 </StackPanel>
             </ScrollViewer>
-            <Label Foreground="White" FontSize="48" Content="Найвище оцінені альбоми" IsEnabled="False" HorizontalAlignment="Center" VerticalAlignment="Top" />
+            <Label Foreground="White" FontSize="48" Content="Послухати пізніше" IsEnabled="False" HorizontalAlignment="Center" VerticalAlignment="Top" />
             <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled" >
                 <StackPanel x:Name="LikeAlbumContent" Orientation = "Horizontal" >
 
