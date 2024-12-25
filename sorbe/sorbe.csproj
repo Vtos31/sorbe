@@ -16,6 +16,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="FireSharp" Version="2.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="Image\1200x1200bf-60.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
@@ -29,7 +33,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="ArtistPage.xaml.cs">
+    <Compile Update="Pages\ArtistPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

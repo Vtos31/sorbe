@@ -19,20 +19,19 @@
 
             <StackPanel Orientation="Horizontal">
 
-                <StackPanel Height="753" VerticalAlignment="Stretch" Width="834">
-                    <Label Foreground="White" FontSize="90" Content="Найкращий альбом" IsEnabled="False" HorizontalAlignment="Center" VerticalAlignment="Top" />
-                    <Button Width="500" Height="500" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    <Label FontSize="48" Foreground="White" Content="&quot;Album name&quot;" HorizontalContentAlignment="Center" Height="65"></Label>
-                    <Label Foreground="White" Content="&quot;Artist name&quot;" HorizontalContentAlignment="Center" Height="58" FontSize="36"/>
+                <StackPanel Height="753" VerticalAlignment="Center" Width="834" HorizontalAlignment="Center">
+                    <Label Foreground="White" FontSize="60" Content="Найкращий альбом" IsEnabled="False" Margin="0,80,0,0" VerticalContentAlignment="Bottom" HorizontalAlignment="Center" />
+                    <Button Width="350" Height="350" HorizontalAlignment="Center"/>
+                    <Label FontSize="48" Foreground="White" Content="&quot;Album name&quot;" HorizontalContentAlignment="Center" Height="65" HorizontalAlignment="Center"/>
+                    <Label Foreground="White" Content="&quot;Artist name&quot;" HorizontalContentAlignment="Center" Height="58" FontSize="36" HorizontalAlignment="Center"/>
                 </StackPanel>
-                <UniformGrid Rows="2" Columns="2" Height="700" Width="700" Margin="0,50,0,0">
+                <UniformGrid Rows="2" Columns="2" Height="550" Width="550" Margin="0,20,0,0">
                     <Image Source="/Image/1200x1200bf-60.jpg" Stretch="UniformToFill" />
                     <Image Source="/Image/a4051869210_10.jpg" Stretch="UniformToFill" />
                     <Image Source="C:\Users\Admin\source\repos\sorbe\sorbe\Image\Born-like-this.jpg" Stretch="UniformToFill" />
                     <Image Source="/Image/PRAY FOR PARIS WALLPAPER 1920x1080 - Imgur.png" Stretch="UniformToFill" />
                 </UniformGrid>
             </StackPanel>
-            <Label Content="AAAAAAAAA" FontSize="72" Background="#FF1A1A1A" Foreground="#FF1A1A1A"></Label>
         </StackPanel>
     </ScrollViewer>
 

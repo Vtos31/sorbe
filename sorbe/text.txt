@@ -47,3 +47,27 @@
                 GridTestMOW.Children.Add(Topicgroup);
             }
            
+
+
+
+           <StackPanel Orientation="Vertical">
+                <Label Content="Νΰιρβ³ζ³ψ³ πεφενη³Ώ" Foreground="White" FontSize="48"></Label>
+                <ScrollViewer>
+                    <StackPanel Orientation="Horizontal" Height="328">
+                        <Border Height="317" Width="405" BorderBrush="#FFC3C2C2" BorderThickness="2,2,2,2">
+                            <Grid Margin="0,0,0,-2">
+                                <Image Source="/Image/PRAY FOR PARIS WALLPAPER 1920x1080 - Imgur.png" HorizontalAlignment="Left" Width="85" Height="85" VerticalAlignment="Top" Stretch="UniformToFill" Margin="8,8,0,0"/>
+                                <Label Content="&quot;ALBUM NAME&quot;" IsEnabled="False" Margin="93,28,0,250" Foreground="#FFB8B8B8" FontSize="22" />
+                                <Label Content="&quot;ARTIST NAME&quot;" Margin="99,60,-6,217" Foreground="Gray" FontSize="16" />
+                                <Label Content="&quot;RATE&quot;" Margin="93,0,0,277" Foreground="#FFC9C9C9" FontSize="24" FontWeight="Bold" />
+
+                                <Rectangle Margin="10,98,10,10" Fill="#FF121212"></Rectangle>
+                                <ScrollViewer Margin="10,98,10,10"  >
+                                    <TextBlock TextWrapping="Wrap" Text="AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaAAAAAAAA" Foreground="#FF808078" FontSize="24"/>
+
+                                </ScrollViewer>
+                            </Grid>
+                        </Border>
+                    </StackPanel>
+                </ScrollViewer>
+            </StackPanel>

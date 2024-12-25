@@ -56,7 +56,7 @@ namespace sorbe
         private void Profile_Click(object sender, RoutedEventArgs e)
         {
 
-            ArtistPage profilePage = new ArtistPage();
+            ProfilePage profilePage = new ProfilePage();
             Main.Content = profilePage;
         }
     }
