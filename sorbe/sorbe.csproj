@@ -40,9 +40,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="music-servis-firebase-adminsdk-b6st9-6c6990962f.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="text.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Google.Cloud.Firestore" Version="3.9.0" />
+	</ItemGroup>
 
 </Project>

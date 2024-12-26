@@ -19,6 +19,13 @@ namespace sorbe
             InitializeComponent();
             MainPage mainPage = new MainPage();
             Main.Content = mainPage;
+            FireBaseController fireBaseController = new FireBaseController();
+            LoadDataAsync(fireBaseController);
+        }
+        private async void LoadDataAsync(FireBaseController fireBaseController)
+        {
+            Dictionary<string, object> d = await fireBaseController.ViewData();
+            Console.WriteLine(d);
         }
         public void EnterToInfoPage_Click(object sender, RoutedEventArgs e)
         {

@@ -1,24 +1,41 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
 using System.Threading.Tasks;
-using FirebaseAdmin;
-using Google.Apis.Auth.OAuth2;
+
 using Google.Cloud.Firestore;
 
 namespace sorbe
 {
     internal class FireBaseController
     {
-        public FireBaseController() {
-            FirebaseApp.Create(new AppOptions()
-            {
-                Credential = GoogleCredential.FromFile("C:\\Users\\Admin\\source\\repos\\sorbe\\sorbe\\music-servis-firebase-adminsdk-b6st9-09d7bba446.json")
-            });
+        private FirestoreDb db;
 
-            FirestoreDb db = FirestoreDb.Create("music-servis");
+        public FireBaseController()
+        {
+
+            string credentialPath = @"C:\Users\Admin\source\repos\sorbe\sorbe\music-servis-firebase-adminsdk-b6st9-6c6990962f.json";
+            Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", credentialPath);
+
+
+             db = FirestoreDb.Create("music-servis");
+            Console.WriteLine("Connected to Firestore!");
+
+        }
+
+        public async Task<Dictionary<string,object>> ViewData()
+        {
+            DocumentReference docRef = db.Collection("music-serves-content").Document("projects");
+            DocumentSnapshot snapshot = await docRef.GetSnapshotAsync();
+            if (snapshot.Exists)
+            {
+                Dictionary<string, object> data = snapshot.ToDictionary();
+                return data;
+            }
+            else
+            {
+                Console.WriteLine("Document does not exist!");
+            }
+            return new Dictionary<string, object>();
         }
     }
 }
