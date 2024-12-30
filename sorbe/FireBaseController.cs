@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-
+using System.Windows.Controls;
+using System.Windows.Documents;
 using Google.Cloud.Firestore;
+
 
 namespace sorbe
 {
@@ -18,24 +20,28 @@ namespace sorbe
 
 
              db = FirestoreDb.Create("music-servis");
-            Console.WriteLine("Connected to Firestore!");
-
         }
 
-        public async Task<Dictionary<string,object>> ViewData()
+        public async Task<List<Dictionary<string, object>>> ViewData()
         {
-            DocumentReference docRef = db.Collection("music-serves-content").Document("projects");
-            DocumentSnapshot snapshot = await docRef.GetSnapshotAsync();
-            if (snapshot.Exists)
+            Query allAlbumQuery = db.Collection("projects");
+            QuerySnapshot allAlbumQuerySnapshot = await allAlbumQuery.GetSnapshotAsync();
+            if (allAlbumQuerySnapshot != null)
             {
-                Dictionary<string, object> data = snapshot.ToDictionary();
-                return data;
+                List<Dictionary<string, object>> list = new List<Dictionary<string, object>>();
+                foreach (DocumentSnapshot documentSnapshot in allAlbumQuerySnapshot.Documents)
+                {
+                    Dictionary<string, object> albums = documentSnapshot.ToDictionary();
+                    
+                    list.Add(albums);
+                }
+
+                return list;
             }
             else
             {
-                Console.WriteLine("Document does not exist!");
             }
-            return new Dictionary<string, object>();
+            return new List<Dictionary<string, object>>();
         }
     }
 }

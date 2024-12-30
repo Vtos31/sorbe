@@ -17,15 +17,16 @@ namespace sorbe
         public MainWindow()
         {
             InitializeComponent();
-            MainPage mainPage = new MainPage();
-            Main.Content = mainPage;
             FireBaseController fireBaseController = new FireBaseController();
             LoadDataAsync(fireBaseController);
+
+
         }
         private async void LoadDataAsync(FireBaseController fireBaseController)
         {
-            Dictionary<string, object> d = await fireBaseController.ViewData();
-            Console.WriteLine(d);
+            List<Dictionary<string, object>> list = await fireBaseController.ViewData();
+            MainPage mainPage = new MainPage(list);
+            Main.Content = mainPage;
         }
         public void EnterToInfoPage_Click(object sender, RoutedEventArgs e)
         {
@@ -56,8 +57,9 @@ namespace sorbe
 
         private void Home_Click(object sender, RoutedEventArgs e)
         {
-            MainPage mainPage = new MainPage();
-            Main.Content = mainPage;
+            FireBaseController fireBaseController = new FireBaseController();
+            LoadDataAsync(fireBaseController);
+
         }
 
         private void Profile_Click(object sender, RoutedEventArgs e)
