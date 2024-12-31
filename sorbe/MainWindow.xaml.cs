@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using sorbe.Utilities;
 
 namespace sorbe
 {
@@ -17,21 +18,16 @@ namespace sorbe
         public MainWindow()
         {
             InitializeComponent();
-            FireBaseController fireBaseController = new FireBaseController();
-            LoadDataAsync(fireBaseController);
+            var controller = FireBaseController.Instance;
+            LoadDataAsync(controller);
 
 
         }
         private async void LoadDataAsync(FireBaseController fireBaseController)
         {
-            List<Dictionary<string, object>> list = await fireBaseController.ViewData();
+            List<Dictionary<string, object>> list = await fireBaseController.ViewData("projects");
             MainPage mainPage = new MainPage(list);
             Main.Content = mainPage;
-        }
-        public void EnterToInfoPage_Click(object sender, RoutedEventArgs e)
-        {
-            InfoPage InfoPage = new InfoPage();
-            Main.Content = InfoPage;
         }
 
         private void SignIn_Click(object sender, RoutedEventArgs e)
@@ -57,9 +53,8 @@ namespace sorbe
 
         private void Home_Click(object sender, RoutedEventArgs e)
         {
-            FireBaseController fireBaseController = new FireBaseController();
-            LoadDataAsync(fireBaseController);
-
+            var controller = FireBaseController.Instance;
+            LoadDataAsync(controller);
         }
 
         private void Profile_Click(object sender, RoutedEventArgs e)

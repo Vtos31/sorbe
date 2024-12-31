@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using sorbe.Utilities;
 
 namespace sorbe
 {
@@ -35,8 +36,10 @@ namespace sorbe
 
                 ScrollViewer ScrollList = new ScrollViewer() {  VerticalScrollBarVisibility = ScrollBarVisibility.Disabled, HorizontalScrollBarVisibility = ScrollBarVisibility.Visible, VerticalAlignment = VerticalAlignment.Stretch };
                 Topicgroup.Children.Add(ScrollList);
+
                 StackPanel List = new StackPanel() { Orientation = Orientation.Horizontal ,VerticalAlignment = VerticalAlignment.Stretch};
                 ScrollList.Content = List;
+
                 int k = 0;
                 for (int i = 0; i < 20; i++)
                     {
@@ -56,8 +59,10 @@ namespace sorbe
                             Height = 200,
                             VerticalAlignment = VerticalAlignment.Center,
                             HorizontalAlignment = HorizontalAlignment.Center,
-                            Content = new Image { Source = CreateImageFromBase64(list[k]["image"].ToString()) } 
+                            Tag = list[k],
+                            Content = new Image { Source = Tools.CreateImageFromBase64(list[k]["image"].ToString()) } 
                         };
+                        button.Click += EnterToInfoPage_Click;
                         stackPanel.Children.Add(button);
                         Label AlbumLabel = new Label
                         {
@@ -86,32 +91,11 @@ namespace sorbe
             }
 
         }
-        private ImageSource CreateImageFromBase64(string base64)
-        {
-            try
-            {
-                byte[] imageBytes = Convert.FromBase64String(base64);
-                using (var ms = new MemoryStream(imageBytes))
-                {
-                    var bitmap = new BitmapImage();
-                    bitmap.BeginInit();
-                    bitmap.CacheOption = BitmapCacheOption.OnLoad; 
-                    bitmap.StreamSource = ms;
-                    bitmap.EndInit();
-                    return bitmap;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Помилка завантаження зображення: {ex.Message}");
-                return null;
-            }
-        }
-        
+
         private void EnterToInfoPage_Click(object sender, RoutedEventArgs e)
         {
-
-            InfoPage infoPage = new InfoPage();
+            Button button = (Button)sender;
+            InfoPage infoPage = new InfoPage((Dictionary<string, object>)button.Tag);
             NavigationService?.Navigate(infoPage);
         }
 

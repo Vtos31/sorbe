@@ -43,7 +43,7 @@
     <None Update="music-servis-firebase-adminsdk-b6st9-6c6990962f.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="text.txt">
+    <None Update="txt\text.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
