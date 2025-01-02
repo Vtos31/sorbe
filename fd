@@ -1,0 +1,107 @@
+[33mcommit ba7715cfc254e5e3cc6678f9f441583237c6b9ba[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m)[m
+Author: Vtos31 <zomyban@gmail.com>
+Date:   Fri Jan 3 01:05:54 2025 +0200
+
+    add simply auth
+
+[33mcommit 6b11f287562fcd5e2afcc10950d82e83056723f8[m
+Author: Vtos31 <zomyban@gmail.com>
+Date:   Fri Jan 3 01:03:08 2025 +0200
+
+    add simply auth
+
+[33mcommit 7e82d345517b4c6f00c943ba379230778ecc8dc4[m
+Author: Vtos31 <zomyban@gmail.com>
+Date:   Fri Jan 3 01:00:59 2025 +0200
+
+    add simply auth
+
+[33mcommit 6d6e93499b793ace102bacbf25c21aafb24b621c[m
+Author: Vtos31 <zomyban@gmail.com>
+Date:   Fri Jan 3 00:51:15 2025 +0200
+
+    add simply auth
+
+[33mcommit 6258b7038091a53a109be17db11413e579c74d0d[m
+Author: Vtos31 <zomyban@gmail.com>
+Date:   Thu Jan 2 21:41:19 2025 +0200
+
+    add simply auth
+
+[33mcommit 443703e1ed11447ed942cf01b0e18a0dfca6a32a[m
+Author: Vtos31 <zomyban@gmail.com>
+Date:   Tue Dec 31 11:11:11 2024 +0200
+
+    Display data in InfoPages
+
+[33mcommit 6a117ebcda230ac190ecf3c12c7eeadf71e716cc[m[33m ([m[1;31morigin/master[m[33m)[m
+Author: Vtos31 <zomyban@gmail.com>
+Date:   Mon Dec 30 09:17:10 2024 +0200
+
+    music data added to the database.MainPage displays data
+
+[33mcommit 56f3157c1c64a87cad6d4b39903c8481c0710ce2[m
+Author: Vtos31 <zomyban@gmail.com>
+Date:   Thu Dec 26 13:43:31 2024 +0200
+
+    fix database connect.read first data from database
+
+[33mcommit 3a478f8729eacedc2547e255474b4adf3a981c1b[m
+Author: Vtos31 <zomyban@gmail.com>
+Date:   Wed Dec 25 12:33:21 2024 +0200
+
+    connected firebase
+
+[33mcommit 943bd157f79873e685053810a7e5e3c6e88a1ad9[m
+Author: Vtos31 <zomyban@gmail.com>
+Date:   Wed Dec 25 10:10:52 2024 +0200
+
+    rework profile pages
+
+[33mcommit 220cf6c3557afa7fc3f84a80a80d92813dcd7521[m
+Author: Vtos31 <zomyban@gmail.com>
+Date:   Sun Dec 22 17:18:03 2024 +0200
+
+    Add artist page
+
+[33mcommit 6a38753c73e04efd65212b10770b5e350c5961b0[m
+Author: Vtos31 <zomyban@gmail.com>
+Date:   Sun Dec 22 16:18:11 2024 +0200
+
+    Add Profile page
+
+[33mcommit de8d73bd7d40fe202e43fec2a7627067173f85dc[m
+Author: Vtos31 <zomyban@gmail.com>
+Date:   Fri Dec 20 21:46:10 2024 +0200
+
+    Add comments in InfoPage
+
+[33mcommit cf69e6824704d51b6af2429559cda15fcf621da8[m
+Author: Vtos31 <zomyban@gmail.com>
+Date:   Thu Dec 19 16:18:46 2024 +0200
+
+    Add home button functionsl
+
+[33mcommit 819899c0ee31b701b66337b629e28ba9f23cfd71[m
+Author: Vtos31 <zomyban@gmail.com>
+Date:   Sun Dec 15 16:26:05 2024 +0200
+
+    Removed ignored files
+
+[33mcommit 3944a0f026bf1580fa0e554b2fc22b151c9bb02e[m
+Author: Vtos31 <zomyban@gmail.com>
+Date:   Sun Dec 15 16:05:53 2024 +0200
+
+    Initial commit with .gitignore
+
+[33mcommit f80dbc0a2e22bbc52d5061f8208bc1cbdbfda3e3[m
+Author: Admin <Admin@DESKTOP-DQ6MDGJ>
+Date:   Sun Dec 8 09:59:34 2024 +0200
+
+    Add project files.
+
+[33mcommit 9e61c038d310e448bc5eca4c01afb98543edebaf[m
+Author: Admin <Admin@DESKTOP-DQ6MDGJ>
+Date:   Sun Dec 8 09:59:31 2024 +0200
+
+    Add .gitattributes and .gitignore.

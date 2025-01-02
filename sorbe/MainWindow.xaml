@@ -21,26 +21,36 @@
                 </LinearGradientBrush>
             </Rectangle.Fill>
         </Rectangle>
-        <Button Content="LogIn" HorizontalAlignment="Left" Margin="1455,24,0,0" VerticalAlignment="Top" Width="50" Height="28" Click="LogIn_Click"/>
-        <Button Content="SignIn" HorizontalAlignment="Left" Margin="1391,24,0,0" VerticalAlignment="Top" Width="50" Height="28" Click="SignIn_Click"/>
+        <Button Content="LogIn" HorizontalAlignment="Left" Margin="1455,24,0,0" VerticalAlignment="Top" Width="50" Height="28" Click="ButtonLogIn_Click"/>
+        <Button Content="SignIn" HorizontalAlignment="Left" Margin="1391,24,0,0" VerticalAlignment="Top" Width="50" Height="28" Click="ButtonSignIn_Click"/>
         <Button x:Name="Profile" Content="Profile" HorizontalAlignment="Left" Margin="1332,13,0,0" VerticalAlignment="Top" Width="50" Height="50" Click="Profile_Click"/>
         <Frame x:Name="Main" Margin="0,71,0,0" NavigationUIVisibility="Hidden">
 
         </Frame>
-        <Border x:Name="AcountEnterPanel" Margin="1262,72,0,459" Visibility="Collapsed"   BorderThickness="1" BorderBrush="Gray" Background="#FF131313">
-
+        <Border x:Name="AcountEnterPanel" Margin="1262,72,0,428" Visibility="Visible" VerticalAlignment="Stretch" BorderThickness="1" BorderBrush="Gray" Background="#FF131313">
             <StackPanel>
                 <Button  Content="X" Height="21" Width="21" HorizontalAlignment="Left" Click="AcountEnterPanelExit_Click"/>
                 <Label x:Name="AcountEnterTitle" Content="Реєстрація" Foreground="White" HorizontalAlignment="Center" FontSize="24"/>
-                <Label Content="Ім'я" Foreground="White"  FontSize="12"/>
-                <TextBox/>
-                <Label Content="Пароль" Foreground="White"  FontSize="12"/>
-                <TextBox/>
-                <Label x:Name="NonLogInText" Content="Перевірка паролю" Foreground="White"  FontSize="12"/>
-                <TextBox x:Name="NonLogInPole"/>
-                <Label Foreground="White"  FontSize="12" Height="20"/>
 
-                <Button Content="Зареєструватися" Height="22" Width="98"/>
+                <Label Content="Пошта" Foreground="White"  FontSize="12"/>
+                <TextBox x:Name="TextboxEmail"/>
+                <Label x:Name="Name" Content="Псевдонім" Foreground="White"  FontSize="12"/>
+                <TextBox x:Name="TextboxName"/>
+                <Label Content="Пароль" Foreground="White"  FontSize="12"/>
+                <PasswordBox x:Name="TextboxPassword"/>
+                <TextBox x:Name="TextboxPasswordShow" Visibility="Collapsed"/>
+                <Button Height="10" Width="10" Margin="225,-17.5,0,0" Click="ShowPassword_Click"></Button>
+
+                <Label x:Name="NonLogInText" Content="Перевірка паролю" Foreground="White"  FontSize="12"/>
+                <PasswordBox x:Name="TextboxPasswordCheck" PasswordChar="●"/>
+                <TextBox x:Name="TextboxPasswordCheckShow" Visibility="Collapsed"/>
+                <Button x:Name="ButtonShow" Height="10" Width="10" Margin="225,-17.5,0,0" Click="ShowPasswordCheck_Click"></Button>
+
+                <Label x:Name="ErrorLabel" Content="" Foreground="Red" Visibility="Collapsed" FontSize="9"/>
+
+                <Button x:Name="DbSignButton" Content="Зареєструватися" Height="22" Width="98" Click="SignIn_Click"/>
+                <Button x:Name="DbLogButton" Content="Авторизуватися" Height="22" Width="98" Visibility="Collapsed" Click="LogIn_Click"/>
+
             </StackPanel>
         </Border>
 

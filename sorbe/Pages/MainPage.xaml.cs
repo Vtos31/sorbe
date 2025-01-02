@@ -60,7 +60,7 @@ namespace sorbe
                             VerticalAlignment = VerticalAlignment.Center,
                             HorizontalAlignment = HorizontalAlignment.Center,
                             Tag = list[k],
-                            Content = new Image { Source = Tools.CreateImageFromBase64(list[k]["image"].ToString()) } 
+                            Content = new Image { Source = Tools.CreateImageFromBase64(list[k]["image"].ToString()), Stretch= Stretch.Fill} 
                         };
                         button.Click += EnterToInfoPage_Click;
                         stackPanel.Children.Add(button);

@@ -1,9 +1,21 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Documents;
+using System.IO;
 using Google.Cloud.Firestore;
+using FirebaseAdmin;
+using Google.Apis.Auth.OAuth2;
+using FirebaseAdmin.Auth;
+using Auth0.ManagementApi.Models;
+using Firebase.Auth;
+using Newtonsoft.Json;
+using System.Net.Http;
+using System.Text;
+using System.Windows;
+
 
 
 namespace sorbe.Utilities
@@ -15,13 +27,18 @@ namespace sorbe.Utilities
 
         private FirestoreDb db;
 
-        // Приватний конструктор для запобігання створення нових екземплярів
+
         private FireBaseController()
         {
-            string credentialPath = @"C:\Users\Admin\source\repos\sorbe\sorbe\music-servis-firebase-adminsdk-b6st9-6c6990962f.json";
+            string credentialPath = @"C:\Users\Admin\source\repos\sorbe\sorbe\mistery\music-servis-firebase-adminsdk-b6st9-53a16acc08.jsongi";
             Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", credentialPath);
-
             db = FirestoreDb.Create("music-servis");
+
+            FirebaseApp.Create(new AppOptions
+            {
+                Credential = GoogleCredential.FromFile(credentialPath),
+            });
+
         }
 
 
@@ -53,7 +70,26 @@ namespace sorbe.Utilities
             }
             return new List<Dictionary<string, object>>();
         }
+        
+       
+        public async Task UserRegistration(string email,string password,string username)
+        {
+            try
+            {
+                var userRecord = await FirebaseAuth.DefaultInstance.CreateUserAsync(new UserRecordArgs()
+                {
+                    Email = email,
+                    Password = password,
+                    DisplayName = username
+                });
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
     }
+
 
 }
 

@@ -348,6 +348,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
-/sorbe/text.txt
-/sorbe/music-servis-firebase-adminsdk-b6st9-09d7bba446.json
-/sorbe/music-servis-firebase-adminsdk-b6st9-6c6990962f.json
+/sorbe/txt/text.txt
+/sorbe/mistery/music-servis-firebase-adminsdk-b6st9-53a16acc08.json
