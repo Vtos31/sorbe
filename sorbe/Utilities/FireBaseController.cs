@@ -70,8 +70,35 @@ namespace sorbe.Utilities
             }
             return new List<Dictionary<string, object>>();
         }
-        
-       
+        private static readonly string apiKey = "AIzaSyCOZ6S6Wnd7t3_Pc_YN7p3q1W7I7oppqtA";
+        private static readonly string signInUrl = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key="+apiKey;
+        public async Task UserAuth(string email, string password, string username)
+        {
+            using (var client = new HttpClient())
+            {
+                var data = new
+                {
+                    email = email,
+                    password = password,
+                    returnSecureToken = true
+                };
+
+                var content = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json");
+
+                var response = await client.PostAsync(signInUrl, content);
+                var responseString = await response.Content.ReadAsStringAsync();
+
+                if (response.IsSuccessStatusCode)
+                {
+                    Console.WriteLine("User signed in successfully!");
+                    Console.WriteLine(responseString);
+                }
+                else
+                {
+                    Console.WriteLine("Error: " + responseString);
+                }
+            }
+        }
         public async Task UserRegistration(string email,string password,string username)
         {
             try
