@@ -42,11 +42,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="mistery\music-servis-firebase-adminsdk-b6st9-53a16acc08.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <None Update="music-servis-firebase-adminsdk-b6st9-53a16acc08.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="txt\text.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="userdata.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 	<ItemGroup>

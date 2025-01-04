@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.IO;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -9,6 +10,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using sorbe.Utilities;
+using static Google.Apis.Requests.BatchRequest;
 
 namespace sorbe
 {
@@ -18,7 +20,8 @@ namespace sorbe
         public MainWindow()
         {
             InitializeComponent();
-            var controller = FireBaseController.Instance;
+            FireBaseController.Instance.InitializeUidAsync();
+
             LoadDataAsync();
 
 
@@ -90,6 +93,7 @@ namespace sorbe
             var controller = FireBaseController.Instance;
             ProfilePage profilePage = new ProfilePage();
             Main.Content = profilePage;
+
         }
 
         private void SignIn_Click(object sender, RoutedEventArgs e)
@@ -97,7 +101,7 @@ namespace sorbe
             ErrorLabel.Visibility = Visibility.Collapsed;
             if (TextboxPasswordCheck.Password == TextboxPassword.Password)
             {
-                FireBaseController.Instance.UserRegistration(TextboxEmail.Text, TextboxPassword.Password,TextboxName.Text);
+                FireBaseController.Instance.UserRegistration(TextboxEmail.Text, TextboxPassword.Password, TextboxName.Text);
             }
             else
             {
@@ -140,7 +144,10 @@ namespace sorbe
 
         private void LogIn_Click(object sender, RoutedEventArgs e)
         {
-            ///FireBaseController.Instance.UserAuth(TextboxEmail.Text, TextboxPassword.Password);
+            if(TextboxPassword.Visibility == Visibility.Collapsed)
+                FireBaseController.Instance.UserAuth(TextboxEmail.Text, TextboxPasswordShow.Text);
+            else
+                FireBaseController.Instance.UserAuth(TextboxEmail.Text, TextboxPassword.Password);
         }
     }
 
