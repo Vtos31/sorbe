@@ -19,6 +19,8 @@ using System.Security.Cryptography;
 using System.Text.Json;
 using static Google.Rpc.Context.AttributeContext.Types;
 using Newtonsoft.Json.Linq;
+using DocumentReference = Google.Cloud.Firestore.DocumentReference;
+using Google.Apis.Auth.OAuth2.Responses;
 
 
 
@@ -71,6 +73,7 @@ namespace sorbe.Utilities
                 }
             }
         }
+
         public async Task<List<Dictionary<string, object>>> ViewData(string collection)
         {
             Query query = db.Collection(collection);
@@ -84,7 +87,26 @@ namespace sorbe.Utilities
             }
             return new List<Dictionary<string, object>>();
         }
-
+        public async Task<Dictionary<string, object>> ViewData(string collection,string document)
+        {
+            try
+            {
+                DocumentSnapshot snapshot = await db.Collection(collection).Document(document).GetSnapshotAsync();
+                if (snapshot != null)
+                {
+                    return snapshot.ToDictionary();
+                }
+                else
+                {
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Помилка: {ex.Message}");
+                return new Dictionary<string, object>();
+            }
+            return new Dictionary<string, object>();
+        }
         public async Task UserAuth(string email, string password)
         {
             using (var client = new HttpClient())
@@ -107,30 +129,31 @@ namespace sorbe.Utilities
                     MessageBox.Show(responseString);
                     File.WriteAllText(@"C:\Users\Admin\source\repos\sorbe\sorbe\userdata.txt", string.Empty);
                     var jsonResponse = JsonConvert.DeserializeObject<SignInClass>(responseString);
-                    File.WriteAllText(@"C:\Users\Admin\source\repos\sorbe\sorbe\userdata.txt", jsonResponse.idToken);
+                    File.WriteAllText(@"C:\Users\Admin\source\repos\sorbe\sorbe\userdata.txt", jsonResponse.refreshToken);
                 }
                 else
                 {
-                    Console.WriteLine("Error: " + responseString);
+                    MessageBox.Show("Error: " + responseString);
                 }
             }
         }
         public async Task<string> AutoAuth()
         {
-            string idToken = File.ReadAllText("C:\\Users\\Admin\\source\\repos\\sorbe\\sorbe\\userdata.txt");
-            if(idToken == null)
+            HttpClient client = new HttpClient();
+            var content = new FormUrlEncodedContent(new[]
             {
-                MessageBox.Show("User not authenticated!");
-                return null;
-            }
+                new KeyValuePair<string, string>("grant_type", "refresh_token"),
+                new KeyValuePair<string, string>("refresh_token", File.ReadAllText(@"C:\Users\Admin\source\repos\sorbe\sorbe\userdata.txt"))
+            });
 
+            HttpResponseMessage response = await client.PostAsync("https://securetoken.googleapis.com/v1/token?key="+apiKey, content);
+            var responseContent = await response.Content.ReadAsStringAsync();
+            var tokenData = JsonConvert.DeserializeObject<TokenResponse>(responseContent);
             try
             {
-                FirebaseToken decodedToken = await FirebaseAuth.DefaultInstance.VerifyIdTokenAsync(idToken);
+                FirebaseToken decodedToken = await FirebaseAuth.DefaultInstance.VerifyIdTokenAsync(tokenData.IdToken);
 
-               
                 string uid = decodedToken.Uid;
-                MessageBox.Show("You just got work done, hit me when church done\r\nThis ain't big pharmacy but fuckin' Yeezy got perks, huh?\r\nYou do what you want now, like you Lil Uzi Vert or some'\r\nShe givin' me FaceTime, even when we in person\r\nI want you dressed up, so I can undress ya\r\nThe money ain't small, but we still at the Webster\r\nShe got some girlfriends, we fucked on the best one\r\nI got a confession, I'm on another run\r\n\r\n[Chorus: Both, Kanye West & Talmadge Armstrong]\r\n(See)\r\nOoh-wee\r\nOoh-wee (So I can see)\r\nOoh-wee\r\nCan see (Ooh-wee, so I can see)\r\nOoh-wee\r\nOoh-wee (So I can see)\r\nOoh-wee, ooh—\r\n\r\n[Refrain: Talmadge Armstrong & Ty Dolla $ign]\r\nSlip off your dress, baby, so I can s—\r\nSlip off your dress, baby, so I can s— (Run it, r");
                 return uid;
             }
             catch (Exception ex)
@@ -138,6 +161,11 @@ namespace sorbe.Utilities
                 MessageBox.Show($"Error: {ex.Message}");
             }
             return null;
+        }
+        public async Task UpdateUserData(string collection, string document, Dictionary<string, object> data)
+        {
+            DocumentReference docRef = db.Collection(collection).Document(document);
+            await docRef.UpdateAsync(data);
         }
         public async Task UserRegistration(string email, string password,string name)
         {
@@ -161,7 +189,7 @@ namespace sorbe.Utilities
 
                     var jsonResponse = JsonConvert.DeserializeObject<SignInClass>(responseString);
                     File.WriteAllText(@"C:\Users\Admin\source\repos\sorbe\sorbe\userdata.txt", string.Empty);
-                    File.WriteAllText(@"C:\Users\Admin\source\repos\sorbe\sorbe\userdata.txt", jsonResponse.idToken);
+                    File.WriteAllText(@"C:\Users\Admin\source\repos\sorbe\sorbe\userdata.txt", jsonResponse.refreshToken);
                     MessageBox.Show("User registered successfully!");
                     FirebaseToken decodedToken = await FirebaseAuth.DefaultInstance.VerifyIdTokenAsync(jsonResponse.idToken);
                     string uid = decodedToken.Uid;

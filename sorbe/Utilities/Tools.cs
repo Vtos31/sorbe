@@ -7,11 +7,28 @@ using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 using System.Windows.Media;
 using System.Windows;
+using Microsoft.Win32;
 
 namespace sorbe.Utilities
 {
     static internal class Tools
     {
+        public static string GetBase64FromImage(string path)
+        {
+
+                try
+                {
+                    byte[] imageArray = File.ReadAllBytes(path);
+                    return Convert.ToBase64String(imageArray);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Помилка завантаження зображення: {ex.Message}");
+                    return null;
+                }
+            
+            return null;
+        }
         public static ImageSource CreateImageFromBase64(string base64)
         {
             try

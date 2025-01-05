@@ -11,13 +11,17 @@
     <ScrollViewer>
         <StackPanel Orientation="Vertical" VerticalAlignment="Stretch">
             <Grid>
-                <Image HorizontalAlignment="Left" VerticalAlignment="Top" Width="400" Height="400" Source="/Image/Born-like-this.jpg"/>
-                <Label Content="&quot;PERSON NAME&quot;" HorizontalAlignment="Left" Margin="400,0,0,0" VerticalAlignment="Top" Height="135" Width="1125" Foreground="White" FontSize="100" FontFamily="Segoe UI Semibold" IsEnabled="False"/>
-                <Label Content="&quot;ABOUT&quot;" HorizontalAlignment="Left" Margin="426,137,0,0" VerticalAlignment="Top" Height="65" Width="1125" Foreground="#FFC3C2C2" FontSize="48" FontFamily="Segoe UI Semibold" IsEnabled="False"/>
-                <Label Content="&quot;FAVORITE GENRE&quot;" HorizontalAlignment="Left" Margin="426,207,0,0" VerticalAlignment="Top" Height="53" Width="1125" Foreground="#FFC3C2C2" FontSize="36" FontFamily="Segoe UI Semibold" IsEnabled="False"/>
-                <Label Content="&quot;LINK&quot;" HorizontalAlignment="Left" Margin="426,265,0,0" VerticalAlignment="Top" Height="53" Width="1125" Foreground="#FFC3C2C2" FontSize="36" FontFamily="Segoe UI Semibold" IsEnabled="False"/>
+
+                <Image x:Name="UserImage" HorizontalAlignment="Left" VerticalAlignment="Top" Width="400" Height="400" Source="/Image/Born-like-this.jpg" Grid.RowSpan="3"/>
+                <Label x:Name="UserName" Content="" HorizontalAlignment="Left" Margin="400,10,0,0" VerticalAlignment="Top" Height="125" Width="1125" Foreground="White" FontSize="100" FontFamily="Segoe UI Semibold" IsEnabled="False"/>
+                <TextBox x:Name="UserNameChange" HorizontalAlignment="Left" Margin="400,10,0,0" VerticalAlignment="Top" Height="125" Width="1125" Foreground="Black" FontSize="100" FontFamily="Segoe UI Semibold" SelectionOpacity="0" Visibility="Collapsed" />
+                <Button x:Name="ChangeNameButton" Margin="400,10,0,0" HorizontalAlignment="Left" Width="81" Height="30" VerticalAlignment="Top" Click="ChangeName_Click" Content="Змінити ім'я" />
+                <Label x:Name="UserfavoriteGenre" Content="&quot;USER EMAIL&quot;" HorizontalAlignment="Left" Margin="413,130,0,0" VerticalAlignment="Top" Height="53" Width="1125" Foreground="#FFC3C2C2" FontSize="36" FontFamily="Segoe UI Semibold" IsEnabled="False" Grid.Row="2"/>
+                <Label x:Name="UserEmail" Content="&quot;FAVORITE GENRE&quot;" HorizontalAlignment="Left" Margin="413,188,0,0" VerticalAlignment="Top" Height="72" Width="1125" Foreground="#FFC3C2C2" FontSize="36" FontFamily="Segoe UI Semibold" IsEnabled="False" Grid.Row="2"/>
+                <Button x:Name="LoadImage" Content="Завантажити фото" HorizontalAlignment="Left" Margin="292,361,0,0" VerticalAlignment="Top" Height="39" Width="108" Click="LoadImage_Click"/>
+                <Button x:Name="CancelChangeNameButton" Margin="486,10,0,0" HorizontalAlignment="Left" Width="81" Height="30" VerticalAlignment="Top" Click="CancelChangeName_Click" Content="Відмінити" />
             </Grid>
-            
+
             <Label Foreground="White" FontSize="48" Content="Найвище оцінені альбоми" IsEnabled="False" HorizontalAlignment="Center" VerticalAlignment="Top" />
             <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled" >
                 <StackPanel x:Name="AlbumContent" Orientation = "Horizontal" >

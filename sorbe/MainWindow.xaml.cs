@@ -19,12 +19,20 @@ namespace sorbe
     {
         public MainWindow()
         {
+            _ = InitializeAppAsync();
             InitializeComponent();
-            FireBaseController.Instance.InitializeUidAsync();
-
             LoadDataAsync();
+           
+        }
+        private async Task InitializeAppAsync()
+        {
+            await FireBaseController.Instance.InitializeUidAsync(); 
 
-
+            if (FireBaseController.Instance.Uid != null)
+            {
+                ButtonLogInPanelOpen.Visibility = Visibility.Collapsed;
+                ButtonSignInPanelOpen.Visibility = Visibility.Collapsed;
+            }
         }
         private async void LoadDataAsync()
         {
@@ -32,9 +40,10 @@ namespace sorbe
             MainPage mainPage = new MainPage(list);
             Main.Content = mainPage;
         }
-        private async void AddDataAsync(FireBaseController fireBaseController)
+        private async Task<Dictionary<string, object>> LoadUserDataAsync()
         {
-           
+            Dictionary<string, object> user = await FireBaseController.Instance.ViewData("users", FireBaseController.Instance.Uid);
+            return user;
         }
 
         private void ButtonSignIn_Click(object sender, RoutedEventArgs e)
@@ -84,14 +93,13 @@ namespace sorbe
 
         private void Home_Click(object sender, RoutedEventArgs e)
         {
-
             LoadDataAsync();
         }
 
-        private void Profile_Click(object sender, RoutedEventArgs e)
+        private async void Profile_Click(object sender, RoutedEventArgs e)
         {
-            var controller = FireBaseController.Instance;
-            ProfilePage profilePage = new ProfilePage();
+            Dictionary<string, object> user = await LoadUserDataAsync();
+            ProfilePage profilePage = new ProfilePage(user);
             Main.Content = profilePage;
 
         }

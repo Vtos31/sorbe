@@ -7,13 +7,21 @@
         mc:Ignorable="d"
         Title="MainWindow" WindowState="Maximized" Height="800" Width="1520" >
     <Grid Background="#FF131313">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="19*"/>
+            <RowDefinition Height="373*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="37*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
 
-        <Rectangle HorizontalAlignment="Center" Height="2" Stroke="Gray" VerticalAlignment="Top" Width="1920" RadiusX="7.3" RadiusY="7.3" Margin="0,70,0,0" RenderTransformOrigin="0.5,0.5" Fill="Gray"/>
+        <Rectangle HorizontalAlignment="Left" Height="2" Stroke="Gray" VerticalAlignment="Top" Width="1920" RadiusX="7.3" RadiusY="7.3" Margin="-200,32,0,0" RenderTransformOrigin="0.5,0.5" Fill="Gray" Grid.ColumnSpan="2" Grid.Row="1"/>
 
 
-        <Button Content="Button" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="49" Width="49" Click="Home_Click"/>
-        <TextBox HorizontalAlignment="Center" Margin="0,14,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="452" Height="42"/>
-        <Rectangle HorizontalAlignment="Left" Height="49" Margin="479,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="49">
+        <Button Content="Button" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="49" Width="49" Click="Home_Click" Grid.RowSpan="2"/>
+        <TextBox HorizontalAlignment="Left" Margin="534,14,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="452" Height="42" Grid.RowSpan="2"/>
+        <Rectangle HorizontalAlignment="Left" Height="49" Margin="479,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="49" Grid.RowSpan="2">
             <Rectangle.Fill>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black"/>
@@ -21,13 +29,16 @@
                 </LinearGradientBrush>
             </Rectangle.Fill>
         </Rectangle>
-        <Button Content="LogIn" HorizontalAlignment="Left" Margin="1455,24,0,0" VerticalAlignment="Top" Width="50" Height="28" Click="ButtonLogIn_Click"/>
-        <Button Content="SignIn" HorizontalAlignment="Left" Margin="1391,24,0,0" VerticalAlignment="Top" Width="50" Height="28" Click="ButtonSignIn_Click"/>
-        <Button x:Name="Profile" Content="Profile" HorizontalAlignment="Left" Margin="1332,13,0,0" VerticalAlignment="Top" Width="50" Height="50" Click="Profile_Click"/>
-        <Frame x:Name="Main" Margin="0,71,0,0" NavigationUIVisibility="Hidden">
+        <StackPanel Orientation="Horizontal" Margin="0,8,4,0" HorizontalAlignment="Right" VerticalAlignment="Top" Grid.ColumnSpan="2" Grid.RowSpan="2">
+            <Button x:Name="ButtonLogInPanelOpen" Content="LogIn" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="70" Height="46" Click="ButtonLogIn_Click"/>
+            <Button x:Name="ButtonSignInPanelOpen" Content="SignIn"  VerticalAlignment="Center" Width="70" Height="46" Click="ButtonSignIn_Click" Margin="10,0,0,0"/>
+            <Button x:Name="Profile" Content="Profile" Width="55" Height="55" Click="Profile_Click" Margin="10,0,0,0"/>
+        </StackPanel>
+
+        <Frame x:Name="Main" Margin="0,33,0,0" NavigationUIVisibility="Hidden" Grid.ColumnSpan="2" Grid.Row="1">
 
         </Frame>
-        <Border x:Name="AcountEnterPanel" Margin="1262,72,0,428" Visibility="Visible" VerticalAlignment="Stretch" BorderThickness="1" BorderBrush="Gray" Background="#FF131313">
+        <Border x:Name="AcountEnterPanel" Margin="1262,34,0,428" Visibility="Collapsed" BorderThickness="1" BorderBrush="Gray" Background="#FF131313" Grid.ColumnSpan="2" Grid.Row="1">
             <StackPanel>
                 <Button  Content="X" Height="21" Width="21" HorizontalAlignment="Left" Click="AcountEnterPanelExit_Click"/>
                 <Label x:Name="AcountEnterTitle" Content="Реєстрація" Foreground="White" HorizontalAlignment="Center" FontSize="24"/>
