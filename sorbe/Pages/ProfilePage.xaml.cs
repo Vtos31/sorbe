@@ -25,86 +25,7 @@ namespace sorbe
         public ProfilePage(Dictionary<string, object> user)
         {
             InitializeComponent();
-            for (int i = 0; i < 20; i++)
-            {
-                StackPanel stackPanel = new StackPanel
-                {
-                    Margin = new Thickness(10,0,0,0)
-                };
-                Button button = new Button
-                {
-                    Width = 300,
-                    Height = 300,
-                    VerticalAlignment = VerticalAlignment.Center,
-                    HorizontalAlignment = HorizontalAlignment.Center,
-                    Background = new ImageBrush
-                    {
-                        ImageSource = new BitmapImage(new Uri("C:\\Users\\Admin\\source\\repos\\sorbe\\sorbe\\Image\\PRAY FOR PARIS WALLPAPER 1920x1080 - Imgur.png")),
-                        Stretch = Stretch.UniformToFill
-                    }
-                };
-                stackPanel.Children.Add(button);
-                Label AlbumLabel = new Label
-                {
-                    FontSize = 18,
-                    HorizontalContentAlignment = HorizontalAlignment.Center,
-                    Foreground = Brushes.White,
-                    Height = 33,
-                    Content = "Album Name"
-                };
-                i = i;
-                stackPanel.Children.Add(AlbumLabel);
-                Label ArtistLabel = new Label
-                {
-                    FontSize = 18,
-                    HorizontalContentAlignment = HorizontalAlignment.Center,
-                    Height = 33,
-                    Foreground = Brushes.White,
-                    Content = "Artist Name"
-                };
-                stackPanel.Children.Add(ArtistLabel);
-                AlbumContent.Children.Add(stackPanel);
-            }
-            for (int i = 0; i < 20; i++)
-            {
-                StackPanel stackPanel = new StackPanel
-                {
-                    Margin = new Thickness(10, 0, 0, 0)
-                };
-                Button button = new Button
-                {
-                    Width = 300,
-                    Height = 300,
-                    VerticalAlignment = VerticalAlignment.Center,
-                    HorizontalAlignment = HorizontalAlignment.Center,
-                    Background = new ImageBrush
-                    {
-                        ImageSource = new BitmapImage(new Uri("C:\\Users\\Admin\\source\\repos\\sorbe\\sorbe\\Image\\PRAY FOR PARIS WALLPAPER 1920x1080 - Imgur.png")),
-                        Stretch = Stretch.UniformToFill
-                    }
-                };
-                stackPanel.Children.Add(button);
-                Label albumLabel = new Label
-                {
-                    FontSize = 18,
-                    HorizontalContentAlignment = HorizontalAlignment.Center,
-                    Foreground = Brushes.White,
-                    Height = 33,
-                    Content = "Album Name"
-                };
-                i = i;
-                stackPanel.Children.Add(albumLabel);
-                Label ArtistLabel = new Label
-                {
-                    FontSize = 18,
-                    HorizontalContentAlignment = HorizontalAlignment.Center,
-                    Height = 33,
-                    Foreground = Brushes.White,
-                    Content = "Artist Name"
-                };
-                stackPanel.Children.Add(ArtistLabel);
-                LikeAlbumContent.Children.Add(stackPanel);
-            }
+            UserDataAboutProjects((List<object>)user["wantlistenproj"],"wantlisten");
 
             UserName.Content = user["name"].ToString();
             UserEmail.Content = user["email"].ToString();
@@ -112,6 +33,65 @@ namespace sorbe
             UserImage.Source = Tools.CreateImageFromBase64(user["image"].ToString());
         }
 
+        private async Task UserDataAboutProjects(List<object> project,string value)
+        {
+
+            int projectsCount = 0;
+            if (project.Count > 10)
+            {
+                projectsCount = 10;
+            }
+            else
+            {
+                projectsCount= project.Count;
+            }
+            for (int i = 0; i < projectsCount; i++)
+            {
+                Dictionary<string, object> data = await FireBaseController.Instance.ViewData("projects", project[i].ToString(),new List<string> {"name","artist","image"});
+                data = data;
+                StackPanel stackPanel = new StackPanel
+                {
+                    Margin = new Thickness(10, 0, 0, 0)
+                };  
+                Button button = new Button
+                {
+                    Width = 300,
+                    Height = 300,
+                    VerticalAlignment = VerticalAlignment.Center,
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    Tag = project[i],
+                    Content = new Image { Source = Tools.CreateImageFromBase64(data["image"].ToString()), Stretch = Stretch.Fill }
+                };
+                button.Click += Profile_Click;
+                stackPanel.Children.Add(button);
+                Label AlbumLabel = new Label
+                {
+                    FontSize = 18,
+                    HorizontalContentAlignment = HorizontalAlignment.Center,
+                    Foreground = Brushes.White,
+                    Height = 33,
+                    Content = data["name"].ToString()
+                };
+                stackPanel.Children.Add(AlbumLabel);
+                Label ArtistLabel = new Label
+                {
+                    FontSize = 18,
+                    HorizontalContentAlignment = HorizontalAlignment.Center,
+                    Height = 33,
+                    Foreground = Brushes.White,
+                    Content = data["artist"].ToString()
+                };
+                stackPanel.Children.Add(ArtistLabel);
+                if(value == "wantlisten")
+                {
+                    LikeAlbumContent.Children.Add(stackPanel);
+                }
+                if (value == "rate")
+                {
+                    AlbumContent.Children.Add(stackPanel);
+                }
+            }
+        }
         private async void LoadImage_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog
@@ -136,7 +116,13 @@ namespace sorbe
                 }
             }
         }
-
+        private async void Profile_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = (Button)sender;
+            Dictionary<string, object> data = await FireBaseController.Instance.ViewData("projects", button.Tag.ToString());
+            InfoPage infoPage = new InfoPage(data);
+            NavigationService?.Navigate(infoPage);
+        }
         private void ChangeName_Click(object sender, RoutedEventArgs e)
         {
             if(UserNameChange.Visibility == Visibility.Visible)

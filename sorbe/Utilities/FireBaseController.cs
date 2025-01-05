@@ -82,8 +82,13 @@ namespace sorbe.Utilities
             if (snapshot != null && snapshot.Documents.Count > 0)
             {
                 return snapshot.Documents
-                              .Select(doc => doc.ToDictionary())
-                              .ToList();
+                                 .Select(doc =>
+                                 {
+                                     var data = doc.ToDictionary();
+                                     data["id"] = doc.Id;
+                                     return data;
+                                 })
+                                 .ToList();
             }
             return new List<Dictionary<string, object>>();
         }
@@ -92,20 +97,40 @@ namespace sorbe.Utilities
             try
             {
                 DocumentSnapshot snapshot = await db.Collection(collection).Document(document).GetSnapshotAsync();
-                if (snapshot != null)
+
+                if (snapshot != null && snapshot.Exists)
                 {
-                    return snapshot.ToDictionary();
-                }
-                else
-                {
+                    var data = snapshot.ToDictionary();
+                    data["id"] = snapshot.Id; 
+                    return data;
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Помилка: {ex.Message}");
-                return new Dictionary<string, object>();
             }
             return new Dictionary<string, object>();
+        }
+        public async Task<Dictionary<string, object>> ViewData(string collection, string document,List<string> values)
+        {
+            DocumentReference docRef = db.Collection(collection).Document(document);
+            DocumentSnapshot snapshot = await docRef.GetSnapshotAsync();
+
+            if (snapshot.Exists)
+            {
+                Dictionary<string, object> data = new Dictionary<string, object>();
+                for (int i = 0; i < values.Count; i++)
+                {
+                    data.Add(values[i], snapshot.GetValue<string>(values[i]));
+                }
+                return data;
+
+            }
+            else
+            {
+                Console.WriteLine("Документ не існує.");
+                return new Dictionary<string, object>();
+            }
         }
         public async Task UserAuth(string email, string password)
         {
@@ -165,8 +190,38 @@ namespace sorbe.Utilities
         public async Task UpdateUserData(string collection, string document, Dictionary<string, object> data)
         {
             DocumentReference docRef = db.Collection(collection).Document(document);
-            await docRef.UpdateAsync(data);
+            if (data.ContainsKey("wantlistenproj") && data["wantlistenproj"] is IEnumerable<object> newValues)
+            {
+                await docRef.UpdateAsync(new Dictionary<string, object>
+                {
+                    { "wantlistenproj", FieldValue.ArrayUnion(newValues.ToArray()) }
+                });
+
+                data.Remove("wantlistenproj");
+
+                await docRef.UpdateAsync(data);
+            } 
         }
+        public async Task DeleteUserData(string collection, string document, Dictionary<string, object> data)
+        {
+            DocumentReference docRef = db.Collection(collection).Document(document);
+
+            if (data.ContainsKey("wantlistenproj") && data["wantlistenproj"] is IEnumerable<object> valuesToRemove)
+            {
+                await docRef.UpdateAsync(new Dictionary<string, object>
+                {
+                    { "wantlistenproj", FieldValue.ArrayRemove(valuesToRemove.ToArray()) }
+                });
+
+                data.Remove("wantlistenproj");
+
+                if (data.Count > 0)
+                {
+                    await docRef.UpdateAsync(data);
+                }
+            }
+        }
+
         public async Task UserRegistration(string email, string password,string name)
         {
             using (var client = new HttpClient())

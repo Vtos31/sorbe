@@ -30,6 +30,7 @@
                 <Image x:Name="ProjectCover" Height="450" Margin="0,68,0,0" Width="450" Source="/Image/1200x1200bf-60.jpg" VerticalAlignment="Top" HorizontalAlignment="Center"/>
                 <Label x:Name="ProjectName" Content="&quot;Label&quot;" HorizontalAlignment="Center" Margin="0,491,0,0" VerticalAlignment="Top" Foreground="White" Height="133" Width="450" FontSize="72" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
                 <Label x:Name="ProjectCreator" Content="&quot;SubLabel&quot;" HorizontalAlignment="Center" Margin="0,558,0,0" VerticalAlignment="Top" Foreground="White" Height="132" Width="450" FontSize="36" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                <Button x:Name="WantListenButton" Content="Хочу послухати" HorizontalAlignment="Left" Margin="894,428,0,0" VerticalAlignment="Top" Width="90" Height="90" Click="WantListenButton_Click"/>
                 <Border BorderBrush="Black" BorderThickness="1" Margin="264,690,275,42" Background="#FF1A1A1A">
                     <Grid>
                         <Image Source="/Image/1200x1200bf-60.jpg" Margin="10,10,0,0" Width="96" Height="87" Stretch="Fill" VerticalAlignment="Top" HorizontalAlignment="Left"/>
