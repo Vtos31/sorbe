@@ -11,7 +11,7 @@
 
     <Grid Background="#FF131313" >
         <ScrollViewer >
-            <Grid >
+            <Grid Height="1516">
                 <StackPanel Margin="31,68,998,0" Background="Black" Height="622" VerticalAlignment="Top">
                     <Label x:Name="ProjectRate" Content="Оцінка: " FontSize="48" Foreground="White"/>
                     <Label x:Name="ProjectYearRelease" Content="Рік видання:" FontSize="24" Foreground="White"/>
@@ -31,10 +31,35 @@
                 <Label x:Name="ProjectName" Content="&quot;Label&quot;" HorizontalAlignment="Center" Margin="0,491,0,0" VerticalAlignment="Top" Foreground="White" Height="133" Width="450" FontSize="72" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
                 <Label x:Name="ProjectCreator" Content="&quot;SubLabel&quot;" HorizontalAlignment="Center" Margin="0,558,0,0" VerticalAlignment="Top" Foreground="White" Height="132" Width="450" FontSize="36" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
                 <Button x:Name="WantListenButton" Content="Хочу послухати" HorizontalAlignment="Left" Margin="894,428,0,0" VerticalAlignment="Top" Width="90" Height="90" Click="WantListenButton_Click"/>
-                <Border BorderBrush="Black" BorderThickness="1" Margin="264,690,275,42" Background="#FF1A1A1A">
+                <Border BorderBrush="Black" BorderThickness="1" Margin="214,110,324,0" Background="#FF1A1A1A" VerticalAlignment="Top">
+                    <StackPanel>
+                        <Grid>
+                            <Image x:Name="CommentUserImage" Source="/Image/1200x1200bf-60.jpg" Margin="11,0,0,0" Width="95" Height="95" Stretch="Fill" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                            <Label x:Name="CommentUserName" Content="&quot;NAME&quot;" HorizontalAlignment="Left" Margin="106,10,0,0" VerticalAlignment="Top" Height="70" Width="285" FontSize="50" Foreground="White"/>
+                        </Grid>
+                        <TextBox x:Name="Comment" TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True"  FontSize="24" Height="132" Width="955" Background="#FF1C1C1C" BorderBrush="#FF565656" Foreground="White" />
+                        <StackPanel x:Name="SelectedOptions" Orientation="Horizontal"/>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Stretch" Width="955" Margin="0,10,0,0">
+                            <Grid VerticalAlignment="Stretch">
+                                <ListBox x:Name="SuggestionsListBox" VirtualizingPanel.IsVirtualizing="True" VirtualizingPanel.VirtualizationMode="Recycling" SelectionChanged="SuggestionsListBox_SelectionChanged" Margin="0,44,0,0" Grid.ColumnSpan="3" />
+                                <TextBox x:Name="SearchBox" Width="199" Height="30" TextChanged="SearchBox_TextChanged" VerticalAlignment="Top" Grid.ColumnSpan="3" />
+                            </Grid>
+                            <Button x:Name="AddGenre" Content="+" Height="30" Width="30" FontSize="11" Background="{x:Null}" BorderBrush="{x:Null}" Click="AddGenre_Click" Margin="0,0,0,20" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="True" Foreground="#FF0CFF00"  />
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" x:Name="ResultsPanel" Margin="0,20,0,0" />
+                       
+                        <Label Content="Остаточна оцінка:" Height="39" Width="285" FontSize="24" Foreground="White" Margin="0,-20,674,0"/>
+                        <TextBox x:Name="CommentRate" Width="40" Height="46" HorizontalAlignment="Left"  Margin="15,0,0,0" FontSize="18" Background="#FF1C1C1C" Foreground="White" VerticalContentAlignment="Bottom"/>
+                        <Label Content="/100" Height="45" Width="71" FontSize="24" Foreground="White" Margin="0,-34,800,0"/>
+                        <Label x:Name="CommentError" Content="Ви не заповнили усі поля або заповнили їх не коректно" Visibility="Collapsed" Height="39" Foreground="Red" Width="454" Margin="0,0,600,0"/>
+                        <Button x:Name="ApplyButton" Height="30" Width="126" Margin="829,0,0,0" Click="ApplyButton_Click" />
+                        
+                    </StackPanel>
+                </Border>
+                <Border BorderBrush="Black" Visibility="Collapsed" BorderThickness="1" Margin="264,690,275,42" Background="#FF1A1A1A">
                     <Grid>
                         <Image Source="/Image/1200x1200bf-60.jpg" Margin="10,10,0,0" Width="96" Height="87" Stretch="Fill" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-                        <Label Content="&quot;NAME&quot;" HorizontalAlignment="Left" Margin="111,18,0,0" VerticalAlignment="Top" Height="70" Width="216" FontSize="48" Foreground="White"/>
+                        <Label Content="&quot;NAME&quot;" HorizontalAlignment="Left" Margin="106,-3,0,0" VerticalAlignment="Top" Height="70" Width="216" FontSize="48" Foreground="White"/>
                         <Label Content="&quot;80&quot;" HorizontalAlignment="Left" Margin="16,84,0,0" VerticalAlignment="Top" Height="55" Width="84" FontSize="36" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
 
                         <TextBlock TextWrapping="Wrap" Text="AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" Foreground="White" FontSize="16" Margin="111,84,0,0"/>

@@ -221,7 +221,6 @@ namespace sorbe.Utilities
                 }
             }
         }
-
         public async Task UserRegistration(string email, string password,string name)
         {
             using (var client = new HttpClient())
@@ -267,6 +266,10 @@ namespace sorbe.Utilities
                     MessageBox.Show($"Error: {responseString}");
                 }
             }
+        }
+        public async Task AddData(string collection, Dictionary<string, object> data)
+        {
+            DocumentReference docRef = await db.Collection("comments").AddAsync(data);
         }
 
 
