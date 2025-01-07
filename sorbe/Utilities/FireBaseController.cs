@@ -21,6 +21,7 @@ using static Google.Rpc.Context.AttributeContext.Types;
 using Newtonsoft.Json.Linq;
 using DocumentReference = Google.Cloud.Firestore.DocumentReference;
 using Google.Apis.Auth.OAuth2.Responses;
+using System.ComponentModel;
 
 
 
@@ -132,6 +133,41 @@ namespace sorbe.Utilities
                 return new Dictionary<string, object>();
             }
         }
+        public async Task<List<Dictionary<string, object>>> ViewData(string collectionName, string fieldName, string valueToSearch)
+        {
+            try
+            {
+                CollectionReference collection = db.Collection(collectionName);
+                Query query = collection.WhereEqualTo(fieldName, valueToSearch);
+                List<Dictionary<string, object>> L = new List<Dictionary<string, object>>();
+                QuerySnapshot querySnapshot = await query.GetSnapshotAsync();
+
+                if (querySnapshot.Documents.Count > 0)
+                {
+                    foreach (DocumentSnapshot documentSnapshot in querySnapshot.Documents)
+                    {
+                        if(L.Count < 5)
+                        {
+                            L.Add(documentSnapshot.ToDictionary());
+                        }
+                        else
+                        {
+                            return L;
+                        }
+                    }
+                    return L;
+                }
+                else
+                {
+                    return new List<Dictionary<string, object>>();
+                }
+            }
+            catch (Exception e)
+            {
+                return new List<Dictionary<string, object>>();
+            }
+        }
+
         public async Task UserAuth(string email, string password)
         {
             using (var client = new HttpClient())
@@ -200,8 +236,13 @@ namespace sorbe.Utilities
                 data.Remove("wantlistenproj");
 
                 await docRef.UpdateAsync(data);
-            } 
+            }
+            else
+            {
+                await docRef.UpdateAsync(data);
+            }
         }
+
         public async Task DeleteUserData(string collection, string document, Dictionary<string, object> data)
         {
             DocumentReference docRef = db.Collection(collection).Document(document);

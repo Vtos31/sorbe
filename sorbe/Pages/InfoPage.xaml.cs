@@ -40,7 +40,6 @@ namespace sorbe
             }
             WantListenButton.Tag = firestoreObject["id"].ToString();
             var tracks = firestoreObject["tracklist"] as List<object>;
-            userimage = firestoreObject["image"].ToString();
             projid = firestoreObject["id"].ToString();
             foreach (var item in tracks)
             {
@@ -50,13 +49,22 @@ namespace sorbe
 
            
              GetUser(FireBaseController.Instance.Uid);
+             getComment();
+        }
+        private async Task getComment()
+        {
+            List<Dictionary<string, object>> d = await FireBaseController.Instance.ViewData("comments", "projectId", projid);
+            foreach (var item in d)
+            {
+                Dictionary<string, object> user = await FireBaseController.Instance.ViewData("users", item["useruid"].ToString());
+                Comments.Children.Add(CreateCustomBorder(item,user));
+            }
 
-
-            
         }
         private async void GetUser(string id)
         {
             Dictionary<string,object> user = await FireBaseController.Instance.ViewData("users", FireBaseController.Instance.Uid);
+            userimage = user["image"].ToString();
             ShowUserOnCommentData(id,user);
             ChangeWantListenButton(id,user);
         }
@@ -158,12 +166,153 @@ namespace sorbe
                 CommentError.Content = "Ви не заповнили усі поля або заповнили їх не коректно";
                 return;
             }
-            FireBaseController.Instance.AddData("comments", new Dictionary<string, object> { { "projectId", projid }, { "username", CommentUserName.Content }, { "userimage", userimage}, { "comment", Comment.Text }, { "genres", genresSelect }, { "rate",CommentRate.Text } });
+            FireBaseController.Instance.AddData("comments", new Dictionary<string, object> { { "projectId", projid }, { "useruid",FireBaseController.Instance.Uid}, { "comment", Comment.Text }, { "genres", genresSelect }, { "rate", CommentRate.Text } });
             Comment.Text = string.Empty;
             CommentRate.Text = string.Empty;
             genresSelect.Clear();
             CommentError.Visibility = Visibility.Collapsed;
             SelectedOptions.Children.Clear();
+        }
+
+        public static Border CreateCustomBorder(Dictionary<string,object> comment, Dictionary<string, object> user)
+        {
+            
+            var border = new Border
+            { 
+                BorderBrush = Brushes.Black,
+                BorderThickness = new Thickness(1),
+                Background = new SolidColorBrush(Color.FromRgb(26, 26, 26)),
+                Width = 1000,
+                Margin = new Thickness(0, 10, 0, 0),
+                VerticalAlignment = VerticalAlignment.Stretch,  
+            };
+
+            
+            var mainStackPanel = new StackPanel();
+
+           
+            var grid = new Grid();
+
+            
+            var image = new Image
+            {
+                Source = Tools.CreateImageFromBase64(user["image"].ToString()),
+                Margin = new Thickness(11, 0, 0, 0),
+                Width = 95,
+                Height = 95,
+                Stretch = Stretch.Fill,
+                VerticalAlignment = VerticalAlignment.Top,
+                HorizontalAlignment = HorizontalAlignment.Left
+            };
+
+            grid.Children.Add(image);
+
+            
+            var textStackPanel = new StackPanel
+            {
+                Orientation = Orientation.Horizontal,
+                Margin = new Thickness(106, 10, 0, 0),
+                VerticalAlignment = VerticalAlignment.Top
+            };
+
+            var nameLabel = new Label
+            {
+                Content = user["name"].ToString(),
+                FontSize = 50,
+                Foreground = Brushes.White,
+                Height = 70
+            };
+
+            var scoreLabel = new Label
+            {
+                Content = comment["rate"] +"/100",
+                FontSize = 36,
+                Foreground = Brushes.White,
+                Height = 55,
+                Width = 146,
+                HorizontalContentAlignment = HorizontalAlignment.Center,
+                VerticalContentAlignment = VerticalAlignment.Center
+            };
+
+            textStackPanel.Children.Add(nameLabel);
+            textStackPanel.Children.Add(scoreLabel);
+            grid.Children.Add(textStackPanel);
+
+
+            mainStackPanel.Children.Add(grid);
+
+            var textBlockBorder = new Border
+            {
+                BorderBrush = new SolidColorBrush(Color.FromRgb(86, 86, 86)),
+                BorderThickness = new Thickness(1),
+                Background = new SolidColorBrush(Color.FromRgb(28, 28, 28)),
+                Margin = new Thickness(0, 10, 0, 0),
+                Width = 955,
+                Height = 132
+            };
+
+            var textBlock = new TextBlock
+            {
+                Text = comment["comment"].ToString(),
+                TextWrapping = TextWrapping.Wrap,
+                FontSize = 24,
+                Foreground = Brushes.White,
+                Padding = new Thickness(5)
+            };
+
+            textBlockBorder.Child = textBlock;
+            mainStackPanel.Children.Add(textBlockBorder);
+
+            var genreStackPanel = new StackPanel
+            {
+                Orientation = Orientation.Horizontal,
+                Margin = new Thickness(10,0, 0, 0)
+            };
+            foreach (var genre in comment["genres"] as List<object>)
+            {
+                var genreLabel = new Label
+                {
+                    Content = genre.ToString(),
+                    FontSize = 18,
+                    Foreground = Brushes.White,
+                    Margin = new Thickness(5, 0, 0, 0)
+                };
+                genreStackPanel.Children.Add(genreLabel);
+            }
+            mainStackPanel.Children.Add(genreStackPanel);
+
+            var buttonStackPanel = new StackPanel
+            {
+                Orientation = Orientation.Horizontal,
+                Height = 43,
+                Margin = new Thickness(0, 5, 0, 0)
+            };
+            
+
+            var button1 = new Button
+            {
+                Height = 40,
+                Width = 40,
+                Margin = new Thickness(829, 0, 0, 0),
+            };
+
+
+            var button2 = new Button
+            {
+                Height = 40,
+                Width = 40,
+                Margin = new Thickness(5, 0, 0, 0),
+            };
+
+
+            buttonStackPanel.Children.Add(button1);
+            buttonStackPanel.Children.Add(button2);
+
+            mainStackPanel.Children.Add(buttonStackPanel);
+
+            border.Child = mainStackPanel;
+
+            return border;
         }
     }
 }
