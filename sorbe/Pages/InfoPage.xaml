@@ -16,8 +16,9 @@
                     <Label x:Name="ProjectRate" Content="Оцінка: " FontSize="48" Foreground="White"/>
                     <Label x:Name="ProjectYearRelease" Content="Рік видання:" FontSize="24" Foreground="White"/>
                     <Label x:Name="ProjectType" Content="Тип: " FontSize="24" Foreground="White"/>
-                    <TextBlock x:Name="ProjectGenre" FontSize="24" Foreground="White" Height="465" Text="Теги: " RenderTransformOrigin="0.5,0.5" Width="486" TextWrapping="WrapWithOverflow" VerticalAlignment="Top" HorizontalAlignment="Left">
-                    </TextBlock>
+                    <StackPanel x:Name="Tags">
+                        <Label Content="Жанри:" Foreground="White" FontSize="22"/>
+                    </StackPanel>
                 </StackPanel>
                 <StackPanel Margin="998,68,31,0" Background="Black" Height="617" VerticalAlignment="Top">
                     <Label Content="Список пісень" FontSize="36" Foreground="White"/>
@@ -27,7 +28,7 @@
                         </StackPanel>
                     </ScrollViewer>
                 </StackPanel>
-                <Image x:Name="ProjectCover" Height="450" Margin="0,68,0,0" Width="450" Source="/Image/1200x1200bf-60.jpg" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+                <Image x:Name="ProjectCover" Height="450" Margin="0,68,0,0" Width="450" Source="/Image/1200x1200bf-60.jpg" VerticalAlignment="Top" HorizontalAlignment="Center" Stretch="Fill"/>
                 <Label x:Name="ProjectName" Content="&quot;Label&quot;" HorizontalAlignment="Center" Margin="0,491,0,0" VerticalAlignment="Top" Foreground="White" Height="133" Width="450" FontSize="72" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
                 <Label x:Name="ProjectCreator" Content="&quot;SubLabel&quot;" HorizontalAlignment="Center" Margin="0,558,0,0" VerticalAlignment="Top" Foreground="White" Height="132" Width="450" FontSize="36" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
                 <Button x:Name="WantListenButton" Content="Хочу послухати" HorizontalAlignment="Left" Margin="894,428,0,0" VerticalAlignment="Top" Width="90" Height="90" Click="WantListenButton_Click"/>
@@ -46,7 +47,7 @@
                     </Grid>
                 </Border>
                 <StackPanel x:Name="Comments" Margin="0,696,0,10" HorizontalAlignment="Center">
-                    <Border BorderBrush="Black" VerticalAlignment="Stretch" BorderThickness="1" Background="#FF1A1A1A" Width="1000">
+                    <Border x:Name="CreateComment" BorderBrush="Black" VerticalAlignment="Stretch" BorderThickness="1" Background="#FF1A1A1A" Width="1000">
                         <StackPanel>
                             <Grid>
                                 <Image x:Name="CommentUserImage" Source="/Image/1200x1200bf-60.jpg" Margin="11,0,0,0" Width="95" Height="95" Stretch="Fill" VerticalAlignment="Top" HorizontalAlignment="Left"/>

@@ -112,6 +112,8 @@ namespace sorbe.Utilities
             }
             return new Dictionary<string, object>();
         }
+       
+       
         public async Task<Dictionary<string, object>> ViewData(string collection, string document,List<string> values)
         {
             DocumentReference docRef = db.Collection(collection).Document(document);
@@ -122,18 +124,24 @@ namespace sorbe.Utilities
                 Dictionary<string, object> data = new Dictionary<string, object>();
                 for (int i = 0; i < values.Count; i++)
                 {
-                    data.Add(values[i], snapshot.GetValue<string>(values[i]));
+                    try
+                    {
+                        data.Add(values[i], snapshot.GetValue<string>(values[i]));
+                    }
+                    catch (Exception ex)
+                    {
+                        data.Add(values[i], snapshot.GetValue<List<string>>(values[i]));
+                    }
                 }
                 return data;
 
             }
             else
             {
-                Console.WriteLine("Документ не існує.");
                 return new Dictionary<string, object>();
             }
         }
-        public async Task<List<Dictionary<string, object>>> ViewData(string collectionName, string fieldName, string valueToSearch)
+        public async Task<List<Dictionary<string, object>>> ViewData(string collectionName, string fieldName, string valueToSearch,int maxCount)
         {
             try
             {
@@ -146,7 +154,7 @@ namespace sorbe.Utilities
                 {
                     foreach (DocumentSnapshot documentSnapshot in querySnapshot.Documents)
                     {
-                        if(L.Count < 5)
+                        if(L.Count < maxCount)
                         {
                             L.Add(documentSnapshot.ToDictionary());
                         }
@@ -166,6 +174,35 @@ namespace sorbe.Utilities
             {
                 return new List<Dictionary<string, object>>();
             }
+        }
+        public async Task UpdateGenreAsync(string document, string newGenre)
+        {
+            DocumentReference docRef = db.Collection("projects").Document(document);
+            DocumentSnapshot snapshot = await docRef.GetSnapshotAsync();
+
+            if (!snapshot.Exists)
+            {
+                return;
+            }
+
+            Dictionary<string, object> data = snapshot.ToDictionary();
+            Dictionary<string, object> tags = data.ContainsKey("tags") && data["tags"] is Dictionary<string, object> existingTags
+                ? existingTags
+                : new Dictionary<string, object>();
+
+            
+            if (tags.ContainsKey(newGenre))
+            {
+                int i = Convert.ToInt32(tags[newGenre].ToString());
+                tags[newGenre] = i + 1;
+                await docRef.UpdateAsync(new Dictionary<string, object> { { "tags", tags } });
+            }
+            else
+            {
+                tags.Add(newGenre,1);
+                await docRef.UpdateAsync(new Dictionary<string, object> { { "tags", tags } });
+            }
+
         }
 
         public async Task UserAuth(string email, string password)
@@ -223,10 +260,10 @@ namespace sorbe.Utilities
             }
             return null;
         }
-        public async Task UpdateUserData(string collection, string document, Dictionary<string, object> data)
+        public async Task UpdateData(string collection, string document, Dictionary<string, object> data)
         {
             DocumentReference docRef = db.Collection(collection).Document(document);
-            if (data.ContainsKey("wantlistenproj") && data["wantlistenproj"] is IEnumerable<object> newValues)
+            if ((data.ContainsKey("wantlistenproj") && data["wantlistenproj"] is IEnumerable<object> newValues))
             {
                 await docRef.UpdateAsync(new Dictionary<string, object>
                 {
@@ -237,10 +274,40 @@ namespace sorbe.Utilities
 
                 await docRef.UpdateAsync(data);
             }
-            else
+            if(data.ContainsKey("rateproj") && data["rateproj"] is IEnumerable<object> newValue)
             {
+                await docRef.UpdateAsync(new Dictionary<string, object>
+                {
+                    { "rateproj", FieldValue.ArrayUnion(newValue.ToArray()) }
+                });
+
+                data.Remove("rateproj");
                 await docRef.UpdateAsync(data);
             }
+            else
+            {
+               await docRef.UpdateAsync(data);
+            }
+        }
+        public async Task UpdateProjectRate(string collection, string document, int rate)
+        {
+            DocumentReference docRef = db.Collection(collection).Document(document);
+            DocumentSnapshot snapshot = await docRef.GetSnapshotAsync();
+            Dictionary<string,object> d = snapshot.ToDictionary();
+            if (d.ContainsKey("rate"))
+            {
+                int i = Convert.ToInt32(d["rate"].ToString());
+                int ic = Convert.ToInt32(d["commentcount"].ToString());
+                int ik = ((i*ic) + rate);
+                d["rate"] = ik / (ic + 1);
+                d["commentcount"] = ic + 1;
+                await docRef.UpdateAsync(d);
+            }
+            else
+            {
+                return;
+            }   
+           
         }
 
         public async Task DeleteUserData(string collection, string document, Dictionary<string, object> data)
@@ -310,9 +377,8 @@ namespace sorbe.Utilities
         }
         public async Task AddData(string collection, Dictionary<string, object> data)
         {
-            DocumentReference docRef = await db.Collection("comments").AddAsync(data);
+            DocumentReference docRef = await db.Collection(collection).AddAsync(data);
         }
-
 
     }
 }

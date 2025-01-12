@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Page1"  >
     <Grid Background="#FF131313">
-        <ScrollViewer x:Name="MainContent" VerticalScrollBarVisibility="Hidden">
+        <ScrollViewer x:Name="MainContent" VerticalScrollBarVisibility="Hidden"  >
             <StackPanel x:Name="GridTopic" VerticalAlignment="Stretch"   Orientation="Vertical">
 
             </StackPanel>

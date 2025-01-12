@@ -27,16 +27,16 @@ namespace sorbe
         {
             InitializeComponent();
 
-
             ProjectCover.Source = Tools.CreateImageFromBase64(firestoreObject["image"].ToString());
             ProjectName.Content = firestoreObject["name"].ToString();
             ProjectCreator.Content = firestoreObject["artist"].ToString();
             ProjectType.Content += firestoreObject["type"].ToString();
             ProjectYearRelease.Content += firestoreObject["year"].ToString();
-            var tags = firestoreObject["tags"] as List<object>; 
+            var tags = firestoreObject["tags"] as Dictionary<string,object>; 
             foreach(var item in tags )
             {
-                ProjectGenre.Text += item.ToString() + ",";
+                Label label = new Label() { Content = "     "+item.Key+" "+item.Value.ToString(), FontSize = 20, Foreground = Brushes.White };
+                Tags.Children.Add(label);
             }
             WantListenButton.Tag = firestoreObject["id"].ToString();
             var tracks = firestoreObject["tracklist"] as List<object>;
@@ -46,14 +46,21 @@ namespace sorbe
                 Label track = new Label() { Content = item.ToString(), FontSize = 20, Foreground = Brushes.White };
                 ProjecTrackList.Children.Add(track);
             }
-
-           
-             GetUser(FireBaseController.Instance.Uid);
+            
+             GetUser(projid);
              getComment();
+
         }
+
         private async Task getComment()
         {
-            List<Dictionary<string, object>> d = await FireBaseController.Instance.ViewData("comments", "projectId", projid);
+            
+            List<Dictionary<string, object>> d = await FireBaseController.Instance.ViewData("comments", "projectId", projid.ToString(),5);
+            List < Dictionary<string, object>> dcheck = d.Where(d => d["useruid"].ToString() == FireBaseController.Instance.Uid).ToList();
+            if (dcheck.Count > 0)
+            {
+                CreateComment.Visibility = Visibility.Collapsed;
+            }
             foreach (var item in d)
             {
                 Dictionary<string, object> user = await FireBaseController.Instance.ViewData("users", item["useruid"].ToString());
@@ -80,6 +87,7 @@ namespace sorbe
             if (user.ContainsKey("wantlistenproj"))
             {
                 var wantlistenproj = user["wantlistenproj"] as List<object>;
+                wantlistenproj = wantlistenproj;
                 if (wantlistenproj.Contains(id))
                 {
                     WantListenButton.Click -= WantListenButton_Click;
@@ -100,7 +108,7 @@ namespace sorbe
             WantListenButton.Click -= WantListenButton_Click;
             WantListenButton.Click += WantListenDeleteButton_Click;
             WantListenButton.Content = "Видалити";
-            FireBaseController.Instance.UpdateUserData("users",FireBaseController.Instance.Uid,new Dictionary<string, object> { { "wantlistenproj", new object[] { button.Tag } } });
+            FireBaseController.Instance.UpdateData("users",FireBaseController.Instance.Uid,new Dictionary<string, object> { { "wantlistenproj", new object[] { button.Tag } } });
         }
         private void WantListenDeleteButton_Click(object sender, RoutedEventArgs e)
         {
@@ -155,7 +163,7 @@ namespace sorbe
             SearchBox.Text = string.Empty;
         }
 
-        private void ApplyButton_Click(object sender, RoutedEventArgs e)
+        private async void ApplyButton_Click(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(Comment.Text) ||
              string.IsNullOrWhiteSpace(CommentRate.Text) ||
@@ -163,10 +171,20 @@ namespace sorbe
              genresSelect == null || genresSelect.Count == 0)
             {
                 CommentError.Visibility = Visibility.Visible;
-                CommentError.Content = "Ви не заповнили усі поля або заповнили їх не коректно";
+                CommentError.Content = "Ви заповнили не усі поля або заповнили їх не коректно";
                 return;
             }
+
+
             FireBaseController.Instance.AddData("comments", new Dictionary<string, object> { { "projectId", projid }, { "useruid",FireBaseController.Instance.Uid}, { "comment", Comment.Text }, { "genres", genresSelect }, { "rate", CommentRate.Text } });
+            FireBaseController.Instance.UpdateData("users", FireBaseController.Instance.Uid, new Dictionary<string, object> { { "rateproj", new object[] { projid } } });
+
+            foreach (var item in genresSelect)
+            {
+               await FireBaseController.Instance.UpdateGenreAsync(projid,item);
+            }
+
+            FireBaseController.Instance.UpdateProjectRate("projects", projid, Convert.ToInt32(CommentRate.Text));
             Comment.Text = string.Empty;
             CommentRate.Text = string.Empty;
             genresSelect.Clear();

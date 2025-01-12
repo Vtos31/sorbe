@@ -25,11 +25,22 @@ namespace sorbe
         public ProfilePage(Dictionary<string, object> user)
         {
             InitializeComponent();
+            UserfavoriteGenre.Content = String.Empty;
             UserDataAboutProjects((List<object>)user["wantlistenproj"],"wantlisten");
-
+            UserDataAboutProjects((List<object>)user["rateproj"], "rate");
             UserName.Content = user["name"].ToString();
             UserEmail.Content = user["email"].ToString();
-            UserfavoriteGenre.Content = user["favgenre"].ToString();
+            if (user["favgenre"] is List<object> favgenre)
+            {
+                UserfavoriteGenre.Content = String.Empty;
+                foreach (var genre in favgenre)
+                {
+                    UserfavoriteGenre.Content += genre.ToString() + "|";
+                }
+            }
+
+            
+            //UserfavoriteGenre.Content = user["favgenre"].ToString();
             UserImage.Source = Tools.CreateImageFromBase64(user["image"].ToString());
         }
 
@@ -48,7 +59,6 @@ namespace sorbe
             for (int i = 0; i < projectsCount; i++)
             {
                 Dictionary<string, object> data = await FireBaseController.Instance.ViewData("projects", project[i].ToString(),new List<string> {"name","artist","image"});
-                data = data;
                 StackPanel stackPanel = new StackPanel
                 {
                     Margin = new Thickness(10, 0, 0, 0)
@@ -64,6 +74,36 @@ namespace sorbe
                 };
                 button.Click += Profile_Click;
                 stackPanel.Children.Add(button);
+                if (value == "rate")
+                {
+                    List<Dictionary<string, object>> commentsdata = await FireBaseController.Instance.ViewData("comments", "projectId", project[i].ToString(), 10) ?? new List<Dictionary<string, object>>();
+                    commentsdata = commentsdata.Where(x => x.ContainsKey("useruid") && x["useruid"].ToString() == FireBaseController.Instance.Uid).ToList();
+
+                    var firstComment = commentsdata.FirstOrDefault();
+                    string rateContent = firstComment != null && firstComment.ContainsKey("rate") ? firstComment["rate"].ToString() : "0";
+
+                    Rectangle rect = new Rectangle
+                    {
+                        Width = 70,
+                        Height = 40,
+                        Fill = Brushes.Black,
+                        Margin = new Thickness(0, -45, 225, 0)
+                    };
+
+                    Label label = new Label
+                    {
+                        Content = $"{rateContent}/100",
+                        Foreground = Brushes.White,
+                        FontSize = 18,
+                        HorizontalContentAlignment = HorizontalAlignment.Center,
+                        VerticalContentAlignment = VerticalAlignment.Center,
+                        Margin = new Thickness(0, -45, 230, 0)
+                    };
+
+                    stackPanel.Children.Add(rect);
+                    stackPanel.Children.Add(label);
+                }
+
                 Label AlbumLabel = new Label
                 {
                     FontSize = 18,
@@ -108,7 +148,7 @@ namespace sorbe
                     BitmapImage bitmap = new BitmapImage(new Uri(selectedFilePath));
                     UserImage.Source = bitmap;
                     string imageInBase64 = Tools.GetBase64FromImage(selectedFilePath);
-                    await FireBaseController.Instance.UpdateUserData("users",FireBaseController.Instance.Uid, new Dictionary<string, object> { { "image", imageInBase64 } });
+                    await FireBaseController.Instance.UpdateData("users",FireBaseController.Instance.Uid, new Dictionary<string, object> { { "image", imageInBase64 } });
                 }
                 catch (Exception ex)
                 {
@@ -131,7 +171,7 @@ namespace sorbe
                 CancelChangeNameButton.Visibility = Visibility.Collapsed;
                 UserName.Visibility = Visibility.Visible;
                 UserName.Content = UserNameChange.Text;
-                FireBaseController.Instance.UpdateUserData("users", FireBaseController.Instance.Uid, new Dictionary<string, object> { { "name", UserNameChange.Text } });
+                FireBaseController.Instance.UpdateData("users", FireBaseController.Instance.Uid, new Dictionary<string, object> { { "name", UserNameChange.Text } });
                 ChangeNameButton.Content = "Змінити ім'я";
             }
             else

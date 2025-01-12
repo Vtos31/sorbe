@@ -10,6 +10,7 @@ namespace sorbe.Utilities
     {
        public static readonly List<string> Genres = new List<string>
         {
+           "Folk Rock","Pop Rock",
             "Pop", "Dance Pop", "Electropop", "Teen Pop",
             "Rock", "Hard Rock", "Soft Rock", "Psychedelic Rock", "Progressive Rock", "Alternative Rock", "Indie Rock",
             "Hip Hop", "Trap", "Boom Bap", "Conscious Hip Hop", "Gangsta Rap",
