@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -24,7 +24,6 @@ namespace sorbe
         public MainPage(Dictionary<string, List<Dictionary<string, object>>> list)
         {
 
-            //FireBaseController.Instance.AddData("projects",dict);
             InitializeComponent();
            
             for (int g = 0; g < list.Count; g++)

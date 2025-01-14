@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Windows;
@@ -10,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using sorbe.Pages;
 using sorbe.Utilities;
 using static Google.Apis.Requests.BatchRequest;
 
@@ -18,6 +20,8 @@ namespace sorbe
 
     public partial class MainWindow : Window
     {
+
+        private List<string> genresSelect = new List<string>();
         public MainWindow()
         {
            
@@ -31,10 +35,23 @@ namespace sorbe
 
             if (FireBaseController.Instance.Uid != null)
             {
-                ButtonLogInPanelOpen.Visibility = Visibility.Collapsed;
-                ButtonSignInPanelOpen.Visibility = Visibility.Collapsed;
+                Profile.Visibility = Visibility.Visible;
+                Exit.Visibility = Visibility.Visible;
+                HomeButton.Visibility = Visibility.Visible;
+                AddAlbumButton.Visibility = Visibility.Visible;
+                SearchButton.Visibility = Visibility.Visible;
+                SearchTextBox.Visibility = Visibility.Visible;
+                LoadDataAsync();
             }
-            LoadDataAsync();
+            else
+            {
+
+                ButtonLogInPanelOpen.Visibility = Visibility.Visible;
+                ButtonSignInPanelOpen.Visibility = Visibility.Visible;
+                AcountEnterPanel.Visibility = Visibility.Visible;
+                SuggestionsListBox.Visibility = Visibility.Visible;
+            }
+            
         }
         private async void LoadDataAsync()
         {
@@ -48,7 +65,8 @@ namespace sorbe
               {"Всім подобається", new List<Dictionary<string, object>>() },
               {"Класика жанру", new List<Dictionary<string, object>>()  }
             };
-
+            if(dict == null || dict.Count == 0)
+                return;
             foreach (string item in TopicPreset.Topics)
             {
                 switch (item)
@@ -87,6 +105,7 @@ namespace sorbe
                     case "Спробуйте щось нове":
                         for(int i = 0; i < 10; i++)
                         {
+                            
                             var d = dict[random.Next(0, dict.Count)];
                             if(!listToTopic["Спробуйте щось нове"].Contains(d))
                                 listToTopic["Спробуйте щось нове"].Add(d);
@@ -128,6 +147,12 @@ namespace sorbe
             Name.Visibility = Visibility.Visible;
             TextboxName.Visibility = Visibility.Visible;
 
+            SuggestionsListBox.Visibility = Visibility.Visible;
+            SelectedOptions.Visibility = Visibility.Visible;
+            AddGenre.Visibility = Visibility.Visible;
+            SearchBox.Visibility = Visibility.Visible;
+            GenreLabel.Visibility = Visibility.Visible;
+
             TextboxPasswordCheckShow.Text = "";
             TextboxPasswordShow.Text = "";
             TextboxEmail.Text = "";
@@ -136,10 +161,6 @@ namespace sorbe
             TextboxName.Text = "";
         }
 
-        private void AcountEnterPanelExit_Click(object sender, RoutedEventArgs e)
-        {
-            AcountEnterPanel.Visibility = Visibility.Collapsed;
-        }
 
         private void ButtonLogIn_Click(object sender, RoutedEventArgs e)
         {
@@ -153,6 +174,12 @@ namespace sorbe
             Name.Visibility = Visibility.Collapsed;
             TextboxName.Visibility = Visibility.Collapsed;
 
+            SuggestionsListBox.Visibility = Visibility.Collapsed;
+            SelectedOptions.Visibility = Visibility.Collapsed;
+            AddGenre.Visibility = Visibility.Collapsed;
+            SearchBox.Visibility = Visibility.Collapsed;
+            GenreLabel.Visibility = Visibility.Collapsed;
+
             TextboxPasswordCheckShow.Text = "";
             TextboxPasswordShow.Text = "";
             TextboxEmail.Text = "";
@@ -164,13 +191,6 @@ namespace sorbe
         private void Home_Click(object sender, RoutedEventArgs e)
         {
             LoadDataAsync();
-            string exePath = Process.GetCurrentProcess().MainModule.FileName;
-
-            // Закриваємо програму
-            Application.Current.Shutdown();
-
-            // Запускаємо новий процес
-            Process.Start(exePath);
         }
 
         private async void Profile_Click(object sender, RoutedEventArgs e)
@@ -186,7 +206,8 @@ namespace sorbe
             ErrorLabel.Visibility = Visibility.Collapsed;
             if (TextboxPasswordCheck.Password == TextboxPassword.Password)
             {
-                FireBaseController.Instance.UserRegistration(TextboxEmail.Text, TextboxPassword.Password, TextboxName.Text);
+                FireBaseController.Instance.UserRegistration(TextboxEmail.Text, TextboxPassword.Password, TextboxName.Text,genresSelect);
+
             }
             else
             {
@@ -233,6 +254,77 @@ namespace sorbe
                 FireBaseController.Instance.UserAuth(TextboxEmail.Text, TextboxPasswordShow.Text);
             else
                 FireBaseController.Instance.UserAuth(TextboxEmail.Text, TextboxPassword.Password);
+        }
+
+        private void Exit_Click(object sender, RoutedEventArgs e)
+        {
+
+            string exePath = Process.GetCurrentProcess().MainModule.FileName;
+            Application.Current.Shutdown();
+            Process.Start(exePath);
+            string relativePath = @"userdata.txt";
+            string path = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, relativePath);
+            File.WriteAllText(path, string.Empty);
+        }
+        private async void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string query = SearchBox.Text.ToLower();
+
+            if (string.IsNullOrWhiteSpace(query))
+            {
+                SuggestionsListBox.Visibility = Visibility.Collapsed;
+                return;
+            }
+
+            var filteredGenres = await Task.Run(() =>
+            {
+                return MusicGenreList.Genres
+                    .Where(g => g.StartsWith(query, StringComparison.OrdinalIgnoreCase))
+                    .Take(100)
+                    .ToList();
+            });
+
+            SuggestionsListBox.ItemsSource = filteredGenres;
+            SuggestionsListBox.Visibility = filteredGenres.Any() ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        private void SuggestionsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (SuggestionsListBox.SelectedItem is string selectedGenre)
+            {
+                SearchBox.Text = selectedGenre;
+                SuggestionsListBox.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void AddGenre_Click(object sender, RoutedEventArgs e)
+        {
+            if(genresSelect.Count == 5)
+            {
+                MessageBox.Show("Ви вже вибрали 5 жанрів");
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(SearchBox.Text))
+            {
+                return;
+            }
+            Label label = new Label() { Foreground = Brushes.White, Content = SearchBox.Text, Margin = new Thickness(5, 0, 0, 0) };
+            genresSelect.Add(SearchBox.Text);
+            SelectedOptions.Children.Add(label);
+
+            SearchBox.Text = string.Empty;
+        }
+
+        private void AddAlbumButton_Click(object sender, RoutedEventArgs e)
+        {
+            AddAlbumPage addAlbumPage = new AddAlbumPage();
+            Main.Content = addAlbumPage;
+        }
+
+        private void Search_Click(object sender, RoutedEventArgs e)
+        {
+            SearchPage searchPage = new SearchPage(SearchTextBox.Text);
+            Main.Content = searchPage;
         }
     }
 

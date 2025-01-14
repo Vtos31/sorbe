@@ -1,0 +1,64 @@
+﻿<Page x:Class="sorbe.Pages.AddAlbumPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:sorbe.Pages"
+      mc:Ignorable="d" 
+
+      Title="AddAlbumPage">
+    <ScrollViewer >
+        <Grid VerticalAlignment="Stretch">
+            <Image x:Name="ImageBox" HorizontalAlignment="Left" Height="470" Margin="10,10,0,0" VerticalAlignment="Top" Width="470" IsEnabled="False" Source="/Image/a4051869210_10.jpg">
+            </Image>
+            <Button x:Name="ChangeImage" Margin="380,380,1040,409" Width="100" Height="100" Click="ChangeImage_Click">
+                <Button.Background>
+                    <ImageBrush ImageSource="/Image/addphoto.png"/>
+                </Button.Background>
+            </Button>
+            <Label Content="Ім'я альбому" HorizontalAlignment="Left" Margin="500,10,0,0" VerticalAlignment="Top" FontSize="48" Foreground="White"/>
+            <TextBox x:Name="AlbumName" HorizontalAlignment="Left"  Height="70" Margin="508,89,0,0" TextWrapping="Wrap"  Width="997" FontSize="40"  Foreground="Black" VerticalAlignment="Top"/>
+            <Label Content="Автор альбому" HorizontalAlignment="Left" Margin="500,164,0,0" VerticalAlignment="Top" FontSize="48" Foreground="White"/>
+            <TextBox x:Name="ArtistName" HorizontalAlignment="Left"  Height="70" Margin="508,243,0,0" TextWrapping="Wrap"  Width="997" FontSize="40"  Foreground="Black" VerticalAlignment="Top"/>
+            <Label Content="Рік випуску альбому" HorizontalAlignment="Left" Margin="505,321,0,0" VerticalAlignment="Top" FontSize="48" Foreground="White"/>
+            <TextBox x:Name="Year" HorizontalAlignment="Left"  Height="70" Margin="513,400,0,0" TextWrapping="Wrap"  Width="997" FontSize="40"  Foreground="Black" VerticalAlignment="Top"/>
+            <Border BorderBrush="White" BorderThickness="1" HorizontalAlignment="Left" Margin="770,500,0,0" Width="750" Height="300" VerticalAlignment="Top">
+                <Grid Height="298">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="461*"/>
+                        <ColumnDefinition Width="287*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="AddGenre" Content="Додати жанр" HorizontalAlignment="Left" Margin="77,10,0,0" VerticalAlignment="Top" Width="200" Height="70" Click="AddGenre_Click" Grid.Column="1" />
+                    <StackPanel x:Name="SelectedOptions" Orientation="Vertical" Margin="10,85,0,0" Height="213" VerticalAlignment="Top"/>
+                    <ListBox x:Name="SuggestionsListBox" VirtualizingPanel.IsVirtualizing="True" VirtualizingPanel.VirtualizationMode="Recycling" SelectionChanged="SuggestionsListBox_SelectionChanged" Margin="0,76,241,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="200" />
+                    <TextBox x:Name="SearchBox" Height="50" TextChanged="SearchBox_TextChanged" VerticalAlignment="Top" Margin="10,10,211,0" />
+
+                </Grid>
+            </Border>
+            <StackPanel Orientation="Vertical" >
+                <Border BorderBrush="White" BorderThickness="1" HorizontalAlignment="Left"  Margin="10,500,0,0" VerticalAlignment="Top" Width="750" >
+                    <Grid>
+                        <Label Content="Список пісень" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="22" Foreground="White" Margin="10,10,0,0"/>
+
+                        <StackPanel x:Name="TrackList" Margin="0,49,248,0">
+
+                        </StackPanel>
+
+                        <TextBox x:Name="TrackBox" Height="33"  VerticalAlignment="Top" Margin="503,10,10,0" FontSize="18" />
+                        <Button x:Name="AddTrack" Content="Додати пісню" HorizontalAlignment="Left" Margin="538,48,0,0" VerticalAlignment="Top" Width="200" Height="70" Click="AddTrack_Click" />
+                        <Label Margin="538,126,0,138" Foreground="White" FontSize="20" Content="Тип альбому" HorizontalAlignment="Left"/>
+                        <ListBox x:Name="TypeSelect"  Margin="538,160,10,0" Height="73" VerticalAlignment="Top">
+                            <ListBoxItem>Альбом</ListBoxItem>
+                            <ListBoxItem>Мініальбом</ListBoxItem>
+                            <ListBoxItem>Сингл</ListBoxItem>
+
+                        </ListBox>
+
+                    </Grid>
+                </Border>
+                <Button x:Name="AddAlbum" Content="Додати альбом" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="200" Height="70" Margin="10,0,0,0" Click="AddAlbum_Click"  />
+            </StackPanel>            
+        </Grid>
+    </ScrollViewer>
+
+</Page>

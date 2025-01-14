@@ -5,65 +5,80 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:sorbe"
         mc:Ignorable="d"
-        Title="MainWindow" WindowState="Maximized" Height="800" Width="1520" >
+        Title="MainWindow"  Height="800" Width="1535" >
     <Grid Background="#FF131313">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="19*"/>
-            <RowDefinition Height="373*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="37*"/>
-            <ColumnDefinition Width="3*"/>
-        </Grid.ColumnDefinitions>
-
-        <Rectangle HorizontalAlignment="Left" Height="2" Stroke="Gray" VerticalAlignment="Top" Width="1920" RadiusX="7.3" RadiusY="7.3" Margin="-200,32,0,0" RenderTransformOrigin="0.5,0.5" Fill="Gray" Grid.ColumnSpan="2" Grid.Row="1"/>
+        <Rectangle HorizontalAlignment="Left" Height="2" Stroke="Gray" VerticalAlignment="Top" Width="1920" RadiusX="7.3" RadiusY="7.3" Margin="-186,66,0,0" RenderTransformOrigin="0.5,0.5" Fill="Gray"/>
 
 
-        <Button Content="Button" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="49" Width="49" Click="Home_Click" Grid.RowSpan="2"/>
-        <TextBox HorizontalAlignment="Left" Margin="534,14,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="452" Height="42" Grid.RowSpan="2"/>
-        <Rectangle HorizontalAlignment="Left" Height="49" Margin="479,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="49" Grid.RowSpan="2">
-            <Rectangle.Fill>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="Black"/>
-                    <GradientStop Color="White" Offset="1"/>
-                </LinearGradientBrush>
-            </Rectangle.Fill>
-        </Rectangle>
-        <StackPanel Orientation="Horizontal" Margin="0,8,4,0" HorizontalAlignment="Right" VerticalAlignment="Top" Grid.ColumnSpan="2" Grid.RowSpan="2">
-            <Button x:Name="ButtonLogInPanelOpen" Content="LogIn" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="70" Height="46" Click="ButtonLogIn_Click"/>
-            <Button x:Name="ButtonSignInPanelOpen" Content="SignIn"  VerticalAlignment="Center" Width="70" Height="46" Click="ButtonSignIn_Click" Margin="10,0,0,0"/>
-            <Button x:Name="Profile" Content="Profile" Width="55" Height="55" Click="Profile_Click" Margin="10,0,0,0"/>
+        <Button x:Name="HomeButton" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="49" Width="49" Click="Home_Click" Grid.RowSpan="2" Visibility="Collapsed" IsCancel="True">
+            <Button.Background>
+                <ImageBrush ImageSource="/Image/homeicon.png"/>
+            </Button.Background>
+
+        </Button>
+        <TextBox x:Name="SearchTextBox" HorizontalAlignment="Center" Margin="0,13,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="452" Height="42" FontSize="24" Visibility="Collapsed"/>
+        <Button x:Name="SearchButton" HorizontalAlignment="Left" Margin="490,9,0,0" VerticalAlignment="Top" Height="50" Width="50" Click="Search_Click" FontSize="24" Visibility="Collapsed">
+            <Button.Background>
+                <ImageBrush ImageSource="/Image/search.png"/>
+            </Button.Background>
+        </Button>
+        <StackPanel Margin="0,109,386,0" HorizontalAlignment="Right" VerticalAlignment="Top">
+            <Button x:Name="ButtonLogInPanelOpen" Content="Авторизація" HorizontalAlignment="Center" Width="73" Height="46" Click="ButtonLogIn_Click" Visibility="Collapsed"/>
+            <Button x:Name="ButtonSignInPanelOpen" Content="Реєстрація"  VerticalAlignment="Center" Width="73" Height="46" Click="ButtonSignIn_Click" Visibility="Collapsed" />
         </StackPanel>
+        <Button x:Name="Profile"  Width="55" Height="55" Click="Profile_Click" Margin="1320,6,0,0" VerticalAlignment="Top" Visibility="Collapsed">
+            <Button.Background>
+                <ImageBrush ImageSource="/Image/acconutcircle.png"/>
+            </Button.Background>
+        </Button>
+        <Button x:Name="Exit" Width="55" Height="55" Click="Exit_Click" Margin="1470,6,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="Collapsed">
+            <Button.Background>
+                <ImageBrush ImageSource="/Image/logout.png"/>
+            </Button.Background>
+        </Button>
 
-        <Frame x:Name="Main" Margin="0,33,0,0" NavigationUIVisibility="Hidden" Grid.ColumnSpan="2" Grid.Row="1">
 
-        </Frame>
-        <Border x:Name="AcountEnterPanel" Margin="1262,34,0,428" Visibility="Collapsed" BorderThickness="1" BorderBrush="Gray" Background="#FF131313" Grid.ColumnSpan="2" Grid.Row="1">
+        <Frame x:Name="Main" Margin="0,73,0,0" NavigationUIVisibility="Hidden"/>
+        <Border x:Name="AcountEnterPanel"  Visibility="Collapsed" BorderThickness="1" BorderBrush="Gray" Background="#FF131313" Margin="0,109,0,0" Width="600" Height="665" HorizontalAlignment="Center" VerticalAlignment="Top">
             <StackPanel>
-                <Button  Content="X" Height="21" Width="21" HorizontalAlignment="Left" Click="AcountEnterPanelExit_Click"/>
-                <Label x:Name="AcountEnterTitle" Content="Реєстрація" Foreground="White" HorizontalAlignment="Center" FontSize="24"/>
+                <Label x:Name="AcountEnterTitle" Content="Реєстрація" Foreground="White" HorizontalAlignment="Center" FontSize="72"/>
+                <Label Content="Пошта" Foreground="White"  FontSize="36"/>
+                <TextBox x:Name="TextboxEmail" Height="40" Width="579" HorizontalAlignment="Left" FontSize="24"/>
+                <Label x:Name="Name" Content="Псевдонім" Foreground="White"  FontSize="36"/>
+                <TextBox x:Name="TextboxName" Height="40" Width="579" HorizontalAlignment="Left" FontSize="24"/>
+                <Label Content="Пароль" Foreground="White"  FontSize="36"/>
+                <PasswordBox x:Name="TextboxPassword" Height="40" Width="579"  HorizontalAlignment="Left" FontSize="24"/>
+                <TextBox x:Name="TextboxPasswordShow" Visibility="Collapsed" Height="40" Width="579"  HorizontalAlignment="Left" FontSize="24"/>
+                <Button Height="35" Width="35" Margin="520,-40,0,0" Click="ShowPassword_Click"></Button>
 
-                <Label Content="Пошта" Foreground="White"  FontSize="12"/>
-                <TextBox x:Name="TextboxEmail"/>
-                <Label x:Name="Name" Content="Псевдонім" Foreground="White"  FontSize="12"/>
-                <TextBox x:Name="TextboxName"/>
-                <Label Content="Пароль" Foreground="White"  FontSize="12"/>
-                <PasswordBox x:Name="TextboxPassword"/>
-                <TextBox x:Name="TextboxPasswordShow" Visibility="Collapsed"/>
-                <Button Height="10" Width="10" Margin="225,-17.5,0,0" Click="ShowPassword_Click"></Button>
+                <Label x:Name="NonLogInText" Content="Перевірка паролю" Foreground="White"  FontSize="36"/>
+                <PasswordBox x:Name="TextboxPasswordCheck"   HorizontalAlignment="Left" PasswordChar="●" Height="40" Width="579" FontSize="24"/>
+                <TextBox x:Name="TextboxPasswordCheckShow"  HorizontalAlignment="Left" Height="40" Width="579" Visibility="Collapsed" FontSize="24"/>
+                <Button x:Name="ButtonShow" Height="35" Width="35" Margin="520,-40,0,0" Click="ShowPasswordCheck_Click"></Button>
+                <Label x:Name="GenreLabel" Content="Додайте свої улюблені жанри" Foreground="White" Visibility="Visible" FontSize="20"/>
+                <StackPanel x:Name="SelectedOptions" Orientation="Horizontal"/>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Stretch" Width="955" Margin="0,10,0,0">
+                    <Grid VerticalAlignment="Stretch">
 
-                <Label x:Name="NonLogInText" Content="Перевірка паролю" Foreground="White"  FontSize="12"/>
-                <PasswordBox x:Name="TextboxPasswordCheck" PasswordChar="●"/>
-                <TextBox x:Name="TextboxPasswordCheckShow" Visibility="Collapsed"/>
-                <Button x:Name="ButtonShow" Height="10" Width="10" Margin="225,-17.5,0,0" Click="ShowPasswordCheck_Click"></Button>
+                        <TextBox x:Name="SearchBox" Width="199" Height="30" TextChanged="SearchBox_TextChanged" VerticalAlignment="Top" Grid.ColumnSpan="3" />
+                    </Grid>
+                    <Button x:Name="AddGenre" Content="+" Height="30" Width="30" FontSize="11" Background="{x:Null}" BorderBrush="{x:Null}" Click="AddGenre_Click" Margin="0,0,0,20" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="True" Foreground="#FF0CFF00"  />
+                </StackPanel>
 
                 <Label x:Name="ErrorLabel" Content="" Foreground="Red" Visibility="Collapsed" FontSize="9"/>
 
-                <Button x:Name="DbSignButton" Content="Зареєструватися" Height="22" Width="98" Click="SignIn_Click"/>
-                <Button x:Name="DbLogButton" Content="Авторизуватися" Height="22" Width="98" Visibility="Collapsed" Click="LogIn_Click"/>
+                <Button x:Name="DbSignButton" Content="Зареєструватися" Height="44" Width="193" Click="SignIn_Click" FontSize="24"/>
+                <Button x:Name="DbLogButton" Content="Авторизуватися" Height="44" Width="193" Visibility="Collapsed" Click="LogIn_Click" FontSize="24"/>
 
             </StackPanel>
-        </Border>
 
+        </Border>
+        <ListBox x:Name="SuggestionsListBox" VirtualizingPanel.IsVirtualizing="True" VirtualizingPanel.VirtualizationMode="Recycling" SelectionChanged="SuggestionsListBox_SelectionChanged" Margin="0,643,1074,0" HorizontalAlignment="Right" Width="200"  VerticalAlignment="Top" Visibility="Collapsed"/>
+        <Button x:Name="AddAlbumButton" Width="50" Height="50" Margin="1335,9,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" BorderBrush="{x:Null}" Click="AddAlbumButton_Click" Visibility="Collapsed" >
+            <Button.Background>
+                <ImageBrush ImageSource="/Image/addcircle.png"/>
+            </Button.Background>
+
+        </Button>
     </Grid>
 </Window>

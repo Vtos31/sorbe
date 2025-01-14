@@ -29,7 +29,7 @@
                     </ScrollViewer>
                 </StackPanel>
                 <Image x:Name="ProjectCover" Height="450" Margin="0,68,0,0" Width="450" Source="/Image/1200x1200bf-60.jpg" VerticalAlignment="Top" HorizontalAlignment="Center" Stretch="Fill"/>
-                <Label x:Name="ProjectName" Content="&quot;Label&quot;" HorizontalAlignment="Center" Margin="0,491,0,0" VerticalAlignment="Top" Foreground="White" Height="133" Width="450" FontSize="72" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                <Label x:Name="ProjectName" Content="AAAAAAAAA" HorizontalAlignment="Center" Margin="0,491,0,0" VerticalAlignment="Top" Foreground="White" Height="133" Width="450" FontSize="72" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
                 <Label x:Name="ProjectCreator" Content="&quot;SubLabel&quot;" HorizontalAlignment="Center" Margin="0,558,0,0" VerticalAlignment="Top" Foreground="White" Height="132" Width="450" FontSize="36" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
                 <Button x:Name="WantListenButton" Content="Хочу послухати" HorizontalAlignment="Left" Margin="894,428,0,0" VerticalAlignment="Top" Width="90" Height="90" Click="WantListenButton_Click"/>
 
@@ -50,8 +50,8 @@
                     <Border x:Name="CreateComment" BorderBrush="Black" VerticalAlignment="Stretch" BorderThickness="1" Background="#FF1A1A1A" Width="1000">
                         <StackPanel>
                             <Grid>
-                                <Image x:Name="CommentUserImage" Source="/Image/1200x1200bf-60.jpg" Margin="11,0,0,0" Width="95" Height="95" Stretch="Fill" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-                                <Label x:Name="CommentUserName" Content="&quot;NAME&quot;" HorizontalAlignment="Left" Margin="106,10,0,0" VerticalAlignment="Top" Height="70" Width="285" FontSize="50" Foreground="White"/>
+                                <Image x:Name="CommentUserImage" Source="/Image/1200x1200bf-60.jpg" Margin="21,0,0,0" Width="75" Height="75" Stretch="Fill" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                <Label x:Name="CommentUserName" Content="&quot;NAME&quot;" HorizontalAlignment="Left" Margin="101,-5,0,0" VerticalAlignment="Top" Height="70" Width="802" FontSize="50" Foreground="White"/>
                             </Grid>
                             <TextBox x:Name="Comment" TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True"  FontSize="24" Height="132" Width="955" Background="#FF1C1C1C" BorderBrush="#FF565656" Foreground="White" />
                             <StackPanel x:Name="SelectedOptions" Orientation="Horizontal"/>

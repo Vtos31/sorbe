@@ -9,9 +9,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="home_100dp_E8EAED_FILL0_wght400_GRAD0_opsz48.png" />
     <None Remove="Image\1200x1200bf-60.jpg" />
     <None Remove="Image\a4051869210_10.jpg" />
+    <None Remove="Image\acconutcircle.png" />
+    <None Remove="Image\addcircle.png" />
+    <None Remove="Image\addphoto.png" />
     <None Remove="Image\Born-like-this.jpg" />
+    <None Remove="Image\logout.png" />
+    <None Remove="Image\search.png" />
+    <None Remove="Pages\Born-like-this.jpg" />
+    <None Remove="Pages\Новий проєкт %281%29.png" />
     <None Remove="PRAY FOR PARIS WALLPAPER 1920x1080 - Imgur.png" />
   </ItemGroup>
 
@@ -23,6 +31,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Image\acconutcircle.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\addcircle.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\addphoto.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\homeicon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Image\1200x1200bf-60.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
@@ -32,7 +52,15 @@
     <Resource Include="Image\Born-like-this.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Image\PRAY FOR PARIS WALLPAPER 1920x1080 - Imgur.png" />
+    <Resource Include="Image\logout.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\PRAY FOR PARIS WALLPAPER 1920x1080 - Imgur.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\search.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>
@@ -42,6 +70,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="AddAlbumIcon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="music-servis-firebase-adminsdk-b6st9-53a16acc08.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

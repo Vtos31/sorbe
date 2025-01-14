@@ -27,8 +27,14 @@ namespace sorbe
         {
             InitializeComponent();
 
+
             ProjectCover.Source = Tools.CreateImageFromBase64(firestoreObject["image"].ToString());
+           
             ProjectName.Content = firestoreObject["name"].ToString();
+            if(ProjectName.Content.ToString().Length > 9)
+            {
+                ProjectName.FontSize = 40;
+            }
             ProjectCreator.Content = firestoreObject["artist"].ToString();
             ProjectType.Content += firestoreObject["type"].ToString();
             ProjectYearRelease.Content += firestoreObject["year"].ToString();
@@ -47,7 +53,7 @@ namespace sorbe
                 ProjecTrackList.Children.Add(track);
             }
             
-             GetUser(projid);
+             GetUser(projid,firestoreObject);
              getComment();
 
         }
@@ -68,10 +74,30 @@ namespace sorbe
             }
 
         }
-        private async void GetUser(string id)
+        private async void GetUser(string id, Dictionary<string, object> firebaseObject)
         {
+            Random random = new Random();
             Dictionary<string,object> user = await FireBaseController.Instance.ViewData("users", FireBaseController.Instance.Uid);
+            string bestGenre = "";
+            if (firebaseObject["tags"] is Dictionary<string, object> tags)
+            {
+                bestGenre = tags
+            .Where(t => int.TryParse(t.Value.ToString(), out _))
+            .OrderByDescending(t => Convert.ToInt32(t.Value))
+            .FirstOrDefault().Key;
+            }
+            if ( user["favgenre"] is List<object> favgenre)
+            {
+                if(bestGenre != null && !favgenre.Contains(bestGenre))
+                {
+                    favgenre[random.Next(0, favgenre.Count)] = bestGenre;
+                    await FireBaseController.Instance.UpdateData("users", FireBaseController.Instance.Uid, new Dictionary<string, object> { { "favgenre", favgenre } });
+                }
+
+            }
+
             userimage = user["image"].ToString();
+
             ShowUserOnCommentData(id,user);
             ChangeWantListenButton(id,user);
         }
@@ -152,6 +178,11 @@ namespace sorbe
 
         private void AddGenre_Click(object sender, RoutedEventArgs e)
         {
+            if (genresSelect.Count == 5)
+            {
+                MessageBox.Show("Ви вже вибрали 5 жанрів");
+                return;
+            }
             if (string.IsNullOrWhiteSpace(SearchBox.Text))
             {
                 return;
@@ -190,6 +221,9 @@ namespace sorbe
             genresSelect.Clear();
             CommentError.Visibility = Visibility.Collapsed;
             SelectedOptions.Children.Clear();
+
+            InfoPage infoPage = new InfoPage(await FireBaseController.Instance.ViewData("projects", projid));
+            NavigationService.Navigate(infoPage);
         }
 
         public static Border CreateCustomBorder(Dictionary<string,object> comment, Dictionary<string, object> user)
@@ -299,34 +333,10 @@ namespace sorbe
             }
             mainStackPanel.Children.Add(genreStackPanel);
 
-            var buttonStackPanel = new StackPanel
-            {
-                Orientation = Orientation.Horizontal,
-                Height = 43,
-                Margin = new Thickness(0, 5, 0, 0)
-            };
-            
-
-            var button1 = new Button
-            {
-                Height = 40,
-                Width = 40,
-                Margin = new Thickness(829, 0, 0, 0),
-            };
 
 
-            var button2 = new Button
-            {
-                Height = 40,
-                Width = 40,
-                Margin = new Thickness(5, 0, 0, 0),
-            };
 
 
-            buttonStackPanel.Children.Add(button1);
-            buttonStackPanel.Children.Add(button2);
-
-            mainStackPanel.Children.Add(buttonStackPanel);
 
             border.Child = mainStackPanel;
 

@@ -12,7 +12,7 @@
         <StackPanel Orientation="Vertical" VerticalAlignment="Stretch">
             <Grid>
 
-                <Image x:Name="UserImage" HorizontalAlignment="Left" VerticalAlignment="Top" Width="400" Height="400" Source="/Image/Born-like-this.jpg" Grid.RowSpan="3" Stretch="Fill"/>
+                <Image x:Name="UserImage" HorizontalAlignment="Left" VerticalAlignment="Top" Width="400" Height="400" Source="/Image/acconutcircle.png" Grid.RowSpan="3" Stretch="Fill"/>
                 <Label x:Name="UserName" Content="" HorizontalAlignment="Left" Margin="400,10,0,0" VerticalAlignment="Top" Height="125" Width="1125" Foreground="White" FontSize="100" FontFamily="Segoe UI Semibold" IsEnabled="False"/>
                 <TextBox x:Name="UserNameChange" HorizontalAlignment="Left" Margin="400,10,0,0" VerticalAlignment="Top" Height="125" Width="1125" Foreground="Black" FontSize="100" FontFamily="Segoe UI Semibold" SelectionOpacity="0" Visibility="Collapsed" />
                 <Button x:Name="ChangeNameButton" Margin="400,10,0,0" HorizontalAlignment="Left" Width="81" Height="30" VerticalAlignment="Top" Click="ChangeName_Click" Content="Змінити ім'я" />
@@ -22,7 +22,7 @@
                 <Button x:Name="CancelChangeNameButton" Margin="486,10,0,0" HorizontalAlignment="Left" Width="81" Visibility="Collapsed" Height="30" VerticalAlignment="Top" Click="CancelChangeName_Click" Content="Відмінити" />
             </Grid>
 
-            <Label Foreground="White" FontSize="48" Content="Найвище оцінені альбоми" IsEnabled="False" HorizontalAlignment="Center" VerticalAlignment="Top" />
+            <Label Foreground="White" FontSize="48" Content="Оціненні альбоми" IsEnabled="False" HorizontalAlignment="Center" VerticalAlignment="Top" />
             <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled" >
                 <StackPanel x:Name="AlbumContent" Orientation = "Horizontal" >
 
@@ -34,7 +34,7 @@
 
                 </StackPanel>
             </ScrollViewer>
-            <Label Height="106" Foreground="#FF1A1A1A" FontSize="48" Content="sdssssssssssssssssssss"/>
+            <Label Height="106" Foreground="#FF1A1A1A" FontSize="48" Content="sdssssssssssssssssssss" Visibility="Hidden"/>
         </StackPanel>
 
     </ScrollViewer>
